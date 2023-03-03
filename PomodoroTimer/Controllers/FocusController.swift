@@ -7,13 +7,15 @@
 
 import UIKit
 
-class ViewController: UIViewController {
+class FocusController: UIViewController {
+    
+    let focusView = FocusView(frame: CGRect.zero)
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Do any additional setup after loading the view.
+        view.addSubview(focusView)
+        focusView.fillSuperview()
     }
-
 
 }
 
