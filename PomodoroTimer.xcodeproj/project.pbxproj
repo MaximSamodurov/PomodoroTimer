@@ -9,7 +9,6 @@
 /* Begin PBXBuildFile section */
 		B227898329B1D5FE009C9BE4 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B227898229B1D5FE009C9BE4 /* AppDelegate.swift */; };
 		B227898729B1D5FE009C9BE4 /* FocusController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B227898629B1D5FE009C9BE4 /* FocusController.swift */; };
-		B227898A29B1D5FE009C9BE4 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B227898829B1D5FE009C9BE4 /* Main.storyboard */; };
 		B227898D29B1D5FE009C9BE4 /* PomodoroTimer.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = B227898B29B1D5FE009C9BE4 /* PomodoroTimer.xcdatamodeld */; };
 		B227898F29B1D601009C9BE4 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B227898E29B1D601009C9BE4 /* Assets.xcassets */; };
 		B227899229B1D601009C9BE4 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B227899029B1D601009C9BE4 /* LaunchScreen.storyboard */; };
@@ -17,13 +16,17 @@
 		B22789A229B1E9C3009C9BE4 /* VerticalStackView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B227899F29B1E9C3009C9BE4 /* VerticalStackView.swift */; };
 		B22789A329B1E9C3009C9BE4 /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = B22789A029B1E9C3009C9BE4 /* Extensions.swift */; };
 		B22789A429B1E9C3009C9BE4 /* LayoutHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = B22789A129B1E9C3009C9BE4 /* LayoutHelper.swift */; };
+		B293498A29B3A24A0076C166 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B293498929B3A24A0076C166 /* Main.storyboard */; };
+		B2C0C5E929B5D1300016BC7E /* Roboto-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = B2C0C5E829B5D1300016BC7E /* Roboto-Bold.ttf */; };
+		B2C0C5EB29B5D3B30016BC7E /* Fonts.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2C0C5EA29B5D3B30016BC7E /* Fonts.swift */; };
+		B2C0C5ED29B5D5D00016BC7E /* RobotoFlex-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = B2C0C5EC29B5D5D00016BC7E /* RobotoFlex-Regular.ttf */; };
+		B2C0C5F129B6417A0016BC7E /* Roboto-Black.ttf in Resources */ = {isa = PBXBuildFile; fileRef = B2C0C5F029B6417A0016BC7E /* Roboto-Black.ttf */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		B227897F29B1D5FE009C9BE4 /* PomodoroTimer.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = PomodoroTimer.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		B227898229B1D5FE009C9BE4 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		B227898629B1D5FE009C9BE4 /* FocusController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FocusController.swift; sourceTree = "<group>"; };
-		B227898929B1D5FE009C9BE4 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		B227898C29B1D5FE009C9BE4 /* PomodoroTimer.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = PomodoroTimer.xcdatamodel; sourceTree = "<group>"; };
 		B227898E29B1D601009C9BE4 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		B227899129B1D601009C9BE4 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
@@ -32,6 +35,11 @@
 		B227899F29B1E9C3009C9BE4 /* VerticalStackView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VerticalStackView.swift; sourceTree = "<group>"; };
 		B22789A029B1E9C3009C9BE4 /* Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
 		B22789A129B1E9C3009C9BE4 /* LayoutHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LayoutHelper.swift; sourceTree = "<group>"; };
+		B293498929B3A24A0076C166 /* Main.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Main.storyboard; sourceTree = "<group>"; };
+		B2C0C5E829B5D1300016BC7E /* Roboto-Bold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Roboto-Bold.ttf"; sourceTree = "<group>"; };
+		B2C0C5EA29B5D3B30016BC7E /* Fonts.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Fonts.swift; sourceTree = "<group>"; };
+		B2C0C5EC29B5D5D00016BC7E /* RobotoFlex-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "RobotoFlex-Regular.ttf"; sourceTree = "<group>"; };
+		B2C0C5F029B6417A0016BC7E /* Roboto-Black.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Roboto-Black.ttf"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -68,10 +76,11 @@
 				B227899E29B1E988009C9BE4 /* Helpers */,
 				B227899A29B1E735009C9BE4 /* Views */,
 				B227899929B1E72D009C9BE4 /* Controllers */,
-				B227898829B1D5FE009C9BE4 /* Main.storyboard */,
 				B227898E29B1D601009C9BE4 /* Assets.xcassets */,
+				B2C0C5E729B5CFE20016BC7E /* fonts */,
 				B227899029B1D601009C9BE4 /* LaunchScreen.storyboard */,
 				B227899329B1D601009C9BE4 /* Info.plist */,
+				B293498929B3A24A0076C166 /* Main.storyboard */,
 				B227898B29B1D5FE009C9BE4 /* PomodoroTimer.xcdatamodeld */,
 			);
 			path = PomodoroTimer;
@@ -108,8 +117,19 @@
 				B22789A029B1E9C3009C9BE4 /* Extensions.swift */,
 				B22789A129B1E9C3009C9BE4 /* LayoutHelper.swift */,
 				B227899F29B1E9C3009C9BE4 /* VerticalStackView.swift */,
+				B2C0C5EA29B5D3B30016BC7E /* Fonts.swift */,
 			);
 			path = Helpers;
+			sourceTree = "<group>";
+		};
+		B2C0C5E729B5CFE20016BC7E /* fonts */ = {
+			isa = PBXGroup;
+			children = (
+				B2C0C5F029B6417A0016BC7E /* Roboto-Black.ttf */,
+				B2C0C5E829B5D1300016BC7E /* Roboto-Bold.ttf */,
+				B2C0C5EC29B5D5D00016BC7E /* RobotoFlex-Regular.ttf */,
+			);
+			path = fonts;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -170,9 +190,12 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B293498A29B3A24A0076C166 /* Main.storyboard in Resources */,
 				B227899229B1D601009C9BE4 /* LaunchScreen.storyboard in Resources */,
+				B2C0C5E929B5D1300016BC7E /* Roboto-Bold.ttf in Resources */,
 				B227898F29B1D601009C9BE4 /* Assets.xcassets in Resources */,
-				B227898A29B1D5FE009C9BE4 /* Main.storyboard in Resources */,
+				B2C0C5ED29B5D5D00016BC7E /* RobotoFlex-Regular.ttf in Resources */,
+				B2C0C5F129B6417A0016BC7E /* Roboto-Black.ttf in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -188,6 +211,7 @@
 				B227898329B1D5FE009C9BE4 /* AppDelegate.swift in Sources */,
 				B227898D29B1D5FE009C9BE4 /* PomodoroTimer.xcdatamodeld in Sources */,
 				B227899C29B1E750009C9BE4 /* FocusView.swift in Sources */,
+				B2C0C5EB29B5D3B30016BC7E /* Fonts.swift in Sources */,
 				B22789A229B1E9C3009C9BE4 /* VerticalStackView.swift in Sources */,
 				B22789A429B1E9C3009C9BE4 /* LayoutHelper.swift in Sources */,
 			);
@@ -196,14 +220,6 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXVariantGroup section */
-		B227898829B1D5FE009C9BE4 /* Main.storyboard */ = {
-			isa = PBXVariantGroup;
-			children = (
-				B227898929B1D5FE009C9BE4 /* Base */,
-			);
-			name = Main.storyboard;
-			sourceTree = "<group>";
-		};
 		B227899029B1D601009C9BE4 /* LaunchScreen.storyboard */ = {
 			isa = PBXVariantGroup;
 			children = (
