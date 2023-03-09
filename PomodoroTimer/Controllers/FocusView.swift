@@ -15,8 +15,6 @@ class FocusView: UIView {
         let image = UIImage(named: imageName)
         let imageView = UIImageView(image: image)
         imageView.contentMode = .scaleToFill
-//        imageView.frame = CGRect(x: 0, y: 0, width: 100, height: 30)
-//        imageView.backgroundColor = .black
         return imageView
     }()
     
@@ -98,22 +96,15 @@ class FocusView: UIView {
         let counterStack = VerticalStackView(arrangedSubViews: [timeMinutesCounter,
                                                                 timeSecondsCounter], spacing: -80)
         
-        let threeDotsVerticalStackView = VerticalStackView(arrangedSubViews: [UIView(frame: .init(x: 0, y: 0, width: 0, height: 0)), threeDotsButton, UIView(frame: .init(x: 0, y: 0, width: 0, height: 0))], spacing: -70)
-        threeDotsVerticalStackView.distribution = .fillEqually
-        
-        
-        let nextSectionVerticalStackView = VerticalStackView(arrangedSubViews: [UIView(frame: .init(x: 0, y: 0, width: 0, height: 0)), nextSectionButton, UIView(frame: .init(x: 0, y: 0, width: 0, height: 0))], spacing: -70)
-        nextSectionVerticalStackView.distribution = .fillEqually
-        
         let lowStackView = UIStackView(arrangedSubviews: [
-            threeDotsVerticalStackView,
+            threeDotsButton,
             pausePlayButton,
-            nextSectionVerticalStackView
+            nextSectionButton
         ])
-        
         
         lowStackView.spacing = 10
         lowStackView.distribution = .fillEqually
+        lowStackView.alignment = .center
         
         addSubview(counterStack)
         addSubview(lowStackView)
@@ -131,11 +122,16 @@ class FocusView: UIView {
             counterStack.centerXAnchor.constraint(equalTo: centerXAnchor),
             counterStack.topAnchor.constraint(equalTo: chipImage.bottomAnchor, constant: 0),
             
-            lowStackView.centerXAnchor.constraint(equalTo: centerXAnchor),
             lowStackView.topAnchor.constraint(equalTo: counterStack.bottomAnchor, constant: 0),
-            lowStackView.heightAnchor.constraint(equalToConstant: 90),
-            lowStackView.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 40),
-            lowStackView.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -40)
+            lowStackView.heightAnchor.constraint(equalToConstant: 100),
+            lowStackView.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 30),
+            lowStackView.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -30),
+            
+            pausePlayButton.topAnchor.constraint(equalTo: lowStackView.topAnchor),
+            pausePlayButton.bottomAnchor.constraint(equalTo: lowStackView.bottomAnchor),
+            
+            nextSectionButton.heightAnchor.constraint(equalToConstant: 80),
+            threeDotsButton.heightAnchor.constraint(equalToConstant: 80)
         ])
         
         backgroundColor = UIColor(#colorLiteral(red: 1, green: 0.9467936158, blue: 0.9479826093, alpha: 1))

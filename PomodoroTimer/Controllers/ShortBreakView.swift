@@ -11,24 +11,22 @@ import UIKit
 class ShortBreakView: UIView {
     
     lazy var chipImage = {
-        let imageName = "сhip"
+        let imageName = "short_break_chip"
         let image = UIImage(named: imageName)
         let imageView = UIImageView(image: image)
         imageView.contentMode = .scaleToFill
-//        imageView.frame = CGRect(x: 0, y: 0, width: 100, height: 30)
-//        imageView.backgroundColor = .black
         return imageView
     }()
     
     
     let timeMinutesCounter = {
         let label = UILabel()
-        label.text = "24"
+        label.text = "04"
         label.numberOfLines = 1
         label.attributedText = NSAttributedString(string: label.text!, attributes: [.kern: 1.1])
         label.clipsToBounds = true
         label.font = .robotoBlack(size: 211)
-        label.textColor = UIColor(#colorLiteral(red: 0.3531352282, green: 0.1171852872, blue: 0.1062337533, alpha: 1))
+        label.textColor = UIColor(#colorLiteral(red: 0.08071897179, green: 0.2525621951, blue: 0.1145745888, alpha: 1))
         label.layer.shadowColor = UIColor.black.cgColor
         label.layer.shadowRadius = 2
         label.layer.shadowOpacity = 0.3
@@ -43,7 +41,7 @@ class ShortBreakView: UIView {
         label.attributedText = NSAttributedString(string: label.text!, attributes: [.kern: 1.1])
         label.numberOfLines = 1
         label.font = .robotoBlack(size: 211)
-        label.textColor = UIColor(#colorLiteral(red: 0.3531352282, green: 0.1171852872, blue: 0.1062337533, alpha: 1))
+        label.textColor = UIColor(#colorLiteral(red: 0.08071897179, green: 0.2525621951, blue: 0.1145745888, alpha: 1))
         label.layer.shadowColor = UIColor.black.cgColor
         label.layer.shadowRadius = 2
         label.layer.shadowOpacity = 0.3
@@ -56,11 +54,11 @@ class ShortBreakView: UIView {
         button.backgroundColor = .black
         button.sizeToFit()
         button.layer.cornerRadius = 25
-        button.backgroundColor = UIColor(#colorLiteral(red: 0.5513764024, green: 0.9112769961, blue: 0.6302468181, alpha: 1))
+        button.backgroundColor = UIColor(#colorLiteral(red: 0.8539052606, green: 0.9821388125, blue: 0.8786407709, alpha: 1))
         
         // config for sf symbol image
         let config = UIImage.SymbolConfiguration(pointSize: 40)
-        button.tintColor = UIColor(#colorLiteral(red: 0.3531352282, green: 0.1171852872, blue: 0.1062337533, alpha: 1))
+        button.tintColor = UIColor(#colorLiteral(red: 0.08071897179, green: 0.2525621951, blue: 0.1145745888, alpha: 1))
         button.setImage(UIImage(systemName: "ellipsis", withConfiguration: config), for: .normal)
         return button
     }()
@@ -74,7 +72,7 @@ class ShortBreakView: UIView {
         
         // config for sf symbol image
         let config = UIImage.SymbolConfiguration(pointSize: 23)
-        button.tintColor = UIColor(#colorLiteral(red: 0.3531352282, green: 0.1171852872, blue: 0.1062337533, alpha: 1))
+        button.tintColor = UIColor(#colorLiteral(red: 0.08071897179, green: 0.2525621951, blue: 0.1145745888, alpha: 1))
 //        button.setImage(UIImage(systemName: "play.fill", withConfiguration: config), for: .normal)
         button.setImage(UIImage(systemName: "pause.fill", withConfiguration: config), for: .normal)
         return button
@@ -85,11 +83,11 @@ class ShortBreakView: UIView {
         button.backgroundColor = .black
         button.sizeToFit()
         button.layer.cornerRadius = 25
-        button.backgroundColor = UIColor(#colorLiteral(red: 0.5513764024, green: 0.9112769961, blue: 0.6302468181, alpha: 1))
+        button.backgroundColor = UIColor(#colorLiteral(red: 0.8539052606, green: 0.9821388125, blue: 0.8786407709, alpha: 1))
         
         // config for sf symbol image
         let config = UIImage.SymbolConfiguration(pointSize: 23)
-        button.tintColor = UIColor(#colorLiteral(red: 0.3531352282, green: 0.1171852872, blue: 0.1062337533, alpha: 1))
+        button.tintColor = UIColor(#colorLiteral(red: 0.08071897179, green: 0.2525621951, blue: 0.1145745888, alpha: 1))
         button.setImage(UIImage(systemName: "forward.fill", withConfiguration: config), for: .normal)
         return button
     }()
@@ -100,22 +98,15 @@ class ShortBreakView: UIView {
         let counterStack = VerticalStackView(arrangedSubViews: [timeMinutesCounter,
                                                                 timeSecondsCounter], spacing: -80)
         
-        let threeDotsVerticalStackView = VerticalStackView(arrangedSubViews: [UIView(frame: .init(x: 0, y: 0, width: 0, height: 0)), threeDotsButton, UIView(frame: .init(x: 0, y: 0, width: 0, height: 0))], spacing: -70)
-        threeDotsVerticalStackView.distribution = .fillEqually
-        
-        
-        let nextSectionVerticalStackView = VerticalStackView(arrangedSubViews: [UIView(frame: .init(x: 0, y: 0, width: 0, height: 0)), nextSectionButton, UIView(frame: .init(x: 0, y: 0, width: 0, height: 0))], spacing: -70)
-        nextSectionVerticalStackView.distribution = .fillEqually
-        
         let lowStackView = UIStackView(arrangedSubviews: [
-            threeDotsVerticalStackView,
+            threeDotsButton,
             pausePlayButton,
-            nextSectionVerticalStackView
+            nextSectionButton
         ])
-        
         
         lowStackView.spacing = 10
         lowStackView.distribution = .fillEqually
+        lowStackView.alignment = .center
         
         addSubview(counterStack)
         addSubview(lowStackView)
@@ -127,21 +118,26 @@ class ShortBreakView: UIView {
         
         NSLayoutConstraint.activate([
             chipImage.topAnchor.constraint(equalTo: topAnchor, constant: 130),
-            chipImage.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 140),
-            chipImage.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -140),
+            chipImage.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 115),
+            chipImage.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -115),
             
             counterStack.centerXAnchor.constraint(equalTo: centerXAnchor),
             counterStack.topAnchor.constraint(equalTo: chipImage.bottomAnchor, constant: 0),
             
-            lowStackView.centerXAnchor.constraint(equalTo: centerXAnchor),
             lowStackView.topAnchor.constraint(equalTo: counterStack.bottomAnchor, constant: 0),
-            lowStackView.heightAnchor.constraint(equalToConstant: 90),
-            lowStackView.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 40),
-            lowStackView.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -40)
+            lowStackView.heightAnchor.constraint(equalToConstant: 100),
+            lowStackView.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 30),
+            lowStackView.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -30),
+            
+            pausePlayButton.topAnchor.constraint(equalTo: lowStackView.topAnchor),
+            pausePlayButton.bottomAnchor.constraint(equalTo: lowStackView.bottomAnchor),
+            
+            nextSectionButton.heightAnchor.constraint(equalToConstant: 80),
+            threeDotsButton.heightAnchor.constraint(equalToConstant: 80)
         ])
         
-        backgroundColor = UIColor(#colorLiteral(red: 0.9476678967, green: 0.9983434081, blue: 0.9622779489, alpha: 1))
-        
+        backgroundColor = UIColor(#colorLiteral(red: 1, green: 0.9467936158, blue: 0.9479826093, alpha: 1))
+       
     }
     
     required init?(coder: NSCoder) {
