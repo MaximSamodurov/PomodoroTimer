@@ -8,7 +8,7 @@
 import Foundation
 import UIKit
 
-class FocusView: UIView {
+class ShortBreakView: UIView {
     
     lazy var chipImage = {
         let imageName = "сhip"
@@ -56,7 +56,7 @@ class FocusView: UIView {
         button.backgroundColor = .black
         button.sizeToFit()
         button.layer.cornerRadius = 25
-        button.backgroundColor = UIColor(#colorLiteral(red: 0.9975082278, green: 0.8373187184, blue: 0.8360101581, alpha: 1))
+        button.backgroundColor = UIColor(#colorLiteral(red: 0.5513764024, green: 0.9112769961, blue: 0.6302468181, alpha: 1))
         
         // config for sf symbol image
         let config = UIImage.SymbolConfiguration(pointSize: 40)
@@ -67,9 +67,10 @@ class FocusView: UIView {
     
     let pausePlayButton = {
         let button = UIButton()
+        button.backgroundColor = .black
         button.sizeToFit()
         button.layer.cornerRadius = 25
-        button.backgroundColor = UIColor(#colorLiteral(red: 1, green: 0.4812640548, blue: 0.4829893708, alpha: 1))
+        button.backgroundColor = UIColor(#colorLiteral(red: 0.5513764024, green: 0.9112769961, blue: 0.6302468181, alpha: 1))
         
         // config for sf symbol image
         let config = UIImage.SymbolConfiguration(pointSize: 23)
@@ -81,9 +82,10 @@ class FocusView: UIView {
     
     let nextSectionButton = {
         let button = UIButton()
+        button.backgroundColor = .black
         button.sizeToFit()
         button.layer.cornerRadius = 25
-        button.backgroundColor = UIColor(#colorLiteral(red: 0.9975082278, green: 0.8373187184, blue: 0.8360101581, alpha: 1))
+        button.backgroundColor = UIColor(#colorLiteral(red: 0.5513764024, green: 0.9112769961, blue: 0.6302468181, alpha: 1))
         
         // config for sf symbol image
         let config = UIImage.SymbolConfiguration(pointSize: 23)
@@ -121,7 +123,7 @@ class FocusView: UIView {
         
         counterStack.translatesAutoresizingMaskIntoConstraints = false
         lowStackView.translatesAutoresizingMaskIntoConstraints = false
-        chipImage.translatesAutoresizingMaskIntoConstraints = false 
+        chipImage.translatesAutoresizingMaskIntoConstraints = false
         
         NSLayoutConstraint.activate([
             chipImage.topAnchor.constraint(equalTo: topAnchor, constant: 130),
@@ -138,7 +140,7 @@ class FocusView: UIView {
             lowStackView.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -40)
         ])
         
-        backgroundColor = UIColor(#colorLiteral(red: 1, green: 0.9467936158, blue: 0.9479826093, alpha: 1))
+        backgroundColor = UIColor(#colorLiteral(red: 0.9476678967, green: 0.9983434081, blue: 0.9622779489, alpha: 1))
         
     }
     

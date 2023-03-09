@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		B212B45629B9EFD80018990C /* ShortBreakView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B212B45529B9EFD80018990C /* ShortBreakView.swift */; };
+		B212B45829B9F2400018990C /* ShortBreakController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B212B45729B9F2400018990C /* ShortBreakController.swift */; };
 		B227898329B1D5FE009C9BE4 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B227898229B1D5FE009C9BE4 /* AppDelegate.swift */; };
 		B227898729B1D5FE009C9BE4 /* FocusController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B227898629B1D5FE009C9BE4 /* FocusController.swift */; };
 		B227898D29B1D5FE009C9BE4 /* PomodoroTimer.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = B227898B29B1D5FE009C9BE4 /* PomodoroTimer.xcdatamodeld */; };
@@ -16,6 +18,8 @@
 		B22789A229B1E9C3009C9BE4 /* VerticalStackView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B227899F29B1E9C3009C9BE4 /* VerticalStackView.swift */; };
 		B22789A329B1E9C3009C9BE4 /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = B22789A029B1E9C3009C9BE4 /* Extensions.swift */; };
 		B22789A429B1E9C3009C9BE4 /* LayoutHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = B22789A129B1E9C3009C9BE4 /* LayoutHelper.swift */; };
+		B28D4B7329B9F7A000B084B5 /* LongBreakViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B28D4B7229B9F7A000B084B5 /* LongBreakViewController.swift */; };
+		B28D4B7529B9F7FC00B084B5 /* LongBreakView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B28D4B7429B9F7FC00B084B5 /* LongBreakView.swift */; };
 		B293498A29B3A24A0076C166 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B293498929B3A24A0076C166 /* Main.storyboard */; };
 		B2C0C5E929B5D1300016BC7E /* Roboto-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = B2C0C5E829B5D1300016BC7E /* Roboto-Bold.ttf */; };
 		B2C0C5EB29B5D3B30016BC7E /* Fonts.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2C0C5EA29B5D3B30016BC7E /* Fonts.swift */; };
@@ -24,6 +28,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		B212B45529B9EFD80018990C /* ShortBreakView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShortBreakView.swift; sourceTree = "<group>"; };
+		B212B45729B9F2400018990C /* ShortBreakController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShortBreakController.swift; sourceTree = "<group>"; };
 		B227897F29B1D5FE009C9BE4 /* PomodoroTimer.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = PomodoroTimer.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		B227898229B1D5FE009C9BE4 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		B227898629B1D5FE009C9BE4 /* FocusController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FocusController.swift; sourceTree = "<group>"; };
@@ -35,6 +41,8 @@
 		B227899F29B1E9C3009C9BE4 /* VerticalStackView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VerticalStackView.swift; sourceTree = "<group>"; };
 		B22789A029B1E9C3009C9BE4 /* Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
 		B22789A129B1E9C3009C9BE4 /* LayoutHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LayoutHelper.swift; sourceTree = "<group>"; };
+		B28D4B7229B9F7A000B084B5 /* LongBreakViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LongBreakViewController.swift; sourceTree = "<group>"; };
+		B28D4B7429B9F7FC00B084B5 /* LongBreakView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LongBreakView.swift; sourceTree = "<group>"; };
 		B293498929B3A24A0076C166 /* Main.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Main.storyboard; sourceTree = "<group>"; };
 		B2C0C5E829B5D1300016BC7E /* Roboto-Bold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Roboto-Bold.ttf"; sourceTree = "<group>"; };
 		B2C0C5EA29B5D3B30016BC7E /* Fonts.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Fonts.swift; sourceTree = "<group>"; };
@@ -90,6 +98,8 @@
 			isa = PBXGroup;
 			children = (
 				B227898629B1D5FE009C9BE4 /* FocusController.swift */,
+				B212B45729B9F2400018990C /* ShortBreakController.swift */,
+				B28D4B7229B9F7A000B084B5 /* LongBreakViewController.swift */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -98,6 +108,8 @@
 			isa = PBXGroup;
 			children = (
 				B227899B29B1E750009C9BE4 /* FocusView.swift */,
+				B212B45529B9EFD80018990C /* ShortBreakView.swift */,
+				B28D4B7429B9F7FC00B084B5 /* LongBreakView.swift */,
 			);
 			name = Views;
 			path = Controllers;
@@ -208,10 +220,14 @@
 			files = (
 				B227898729B1D5FE009C9BE4 /* FocusController.swift in Sources */,
 				B22789A329B1E9C3009C9BE4 /* Extensions.swift in Sources */,
+				B28D4B7529B9F7FC00B084B5 /* LongBreakView.swift in Sources */,
+				B28D4B7329B9F7A000B084B5 /* LongBreakViewController.swift in Sources */,
 				B227898329B1D5FE009C9BE4 /* AppDelegate.swift in Sources */,
 				B227898D29B1D5FE009C9BE4 /* PomodoroTimer.xcdatamodeld in Sources */,
 				B227899C29B1E750009C9BE4 /* FocusView.swift in Sources */,
 				B2C0C5EB29B5D3B30016BC7E /* Fonts.swift in Sources */,
+				B212B45829B9F2400018990C /* ShortBreakController.swift in Sources */,
+				B212B45629B9EFD80018990C /* ShortBreakView.swift in Sources */,
 				B22789A229B1E9C3009C9BE4 /* VerticalStackView.swift in Sources */,
 				B22789A429B1E9C3009C9BE4 /* LayoutHelper.swift in Sources */,
 			);

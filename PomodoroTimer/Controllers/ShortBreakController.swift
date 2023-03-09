@@ -7,9 +7,9 @@
 
 import UIKit
 
-class FocusController: UIViewController {
+class ShortBreakController: UIViewController {
     
-    let focusView = FocusView(frame: CGRect.zero)
+    let shortBreakView = ShortBreakView(frame: CGRect.zero)
 
     var timer = Timer()
     var timesOfTimer = ["work": 25, "breaktime": 5]
@@ -21,10 +21,10 @@ class FocusController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        view.addSubview(focusView)
-        focusView.fillSuperview()
-        focusView.pausePlayButton.addTarget(self, action: #selector(playPause), for: .touchUpInside)
-        focusView.nextSectionButton.addTarget(self, action: #selector(nextSection), for: .touchUpInside)
+        view.addSubview(shortBreakView)
+        shortBreakView.fillSuperview()
+        shortBreakView.pausePlayButton.addTarget(self, action: #selector(playPause), for: .touchUpInside)
+        shortBreakView.nextSectionButton.addTarget(self, action: #selector(nextSection), for: .touchUpInside)
     }
     
     func updateTimeLable() {
@@ -40,11 +40,9 @@ class FocusController: UIViewController {
             timer25["seconds"]! -= 1
         }
         
-        focusView.timeMinutesCounter.text = "\(timer25["minutes"]!)"
-        focusView.timeSecondsCounter.text = "\(timer25["seconds"]!)"
+        shortBreakView.timeMinutesCounter.text = "\(timer25["minutes"]!)"
+        shortBreakView.timeSecondsCounter.text = "\(timer25["seconds"]!)"
     }
-    
-    
     
     @objc func playPause() {
         //каждый раз как мы нажимаем на кнопку мы меняем global state isCounting
@@ -69,7 +67,7 @@ class FocusController: UIViewController {
     }
     
     @objc func nextSection() {
-        let destinationVC = ShortBreakController()
+        let destinationVC = LongBreakViewController()
         self.present(destinationVC, animated: true)
         print("tapped")
     }

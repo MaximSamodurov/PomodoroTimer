@@ -8,7 +8,7 @@
 import Foundation
 import UIKit
 
-class FocusView: UIView {
+class LongBreakView: UIView {
     
     lazy var chipImage = {
         let imageName = "сhip"
@@ -56,7 +56,7 @@ class FocusView: UIView {
         button.backgroundColor = .black
         button.sizeToFit()
         button.layer.cornerRadius = 25
-        button.backgroundColor = UIColor(#colorLiteral(red: 0.9975082278, green: 0.8373187184, blue: 0.8360101581, alpha: 1))
+        button.backgroundColor = UIColor(#colorLiteral(red: 0.546617806, green: 0.7940312624, blue: 0.9990682006, alpha: 1))
         
         // config for sf symbol image
         let config = UIImage.SymbolConfiguration(pointSize: 40)
@@ -67,13 +67,14 @@ class FocusView: UIView {
     
     let pausePlayButton = {
         let button = UIButton()
+        button.backgroundColor = .black
         button.sizeToFit()
         button.layer.cornerRadius = 25
-        button.backgroundColor = UIColor(#colorLiteral(red: 1, green: 0.4812640548, blue: 0.4829893708, alpha: 1))
+        button.backgroundColor = UIColor(#colorLiteral(red: 0.546617806, green: 0.7940312624, blue: 0.9990682006, alpha: 1))
         
         // config for sf symbol image
         let config = UIImage.SymbolConfiguration(pointSize: 23)
-        button.tintColor = UIColor(#colorLiteral(red: 0.3531352282, green: 0.1171852872, blue: 0.1062337533, alpha: 1))
+        button.tintColor = UIColor(#colorLiteral(red: 0.08153427392, green: 0.1885411143, blue: 0.278116703, alpha: 1))
 //        button.setImage(UIImage(systemName: "play.fill", withConfiguration: config), for: .normal)
         button.setImage(UIImage(systemName: "pause.fill", withConfiguration: config), for: .normal)
         return button
@@ -81,9 +82,10 @@ class FocusView: UIView {
     
     let nextSectionButton = {
         let button = UIButton()
+        button.backgroundColor = .black
         button.sizeToFit()
         button.layer.cornerRadius = 25
-        button.backgroundColor = UIColor(#colorLiteral(red: 0.9975082278, green: 0.8373187184, blue: 0.8360101581, alpha: 1))
+        button.backgroundColor = UIColor(#colorLiteral(red: 0.546617806, green: 0.7940312624, blue: 0.9990682006, alpha: 1))
         
         // config for sf symbol image
         let config = UIImage.SymbolConfiguration(pointSize: 23)
@@ -121,7 +123,7 @@ class FocusView: UIView {
         
         counterStack.translatesAutoresizingMaskIntoConstraints = false
         lowStackView.translatesAutoresizingMaskIntoConstraints = false
-        chipImage.translatesAutoresizingMaskIntoConstraints = false 
+        chipImage.translatesAutoresizingMaskIntoConstraints = false
         
         NSLayoutConstraint.activate([
             chipImage.topAnchor.constraint(equalTo: topAnchor, constant: 130),
@@ -138,7 +140,7 @@ class FocusView: UIView {
             lowStackView.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -40)
         ])
         
-        backgroundColor = UIColor(#colorLiteral(red: 1, green: 0.9467936158, blue: 0.9479826093, alpha: 1))
+        backgroundColor = UIColor(#colorLiteral(red: 0.9480761886, green: 0.9769756198, blue: 0.9984489083, alpha: 1))
         
     }
     
