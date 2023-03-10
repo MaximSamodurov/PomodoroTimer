@@ -57,9 +57,9 @@ class FocusView: UIView {
         button.backgroundColor = UIColor(#colorLiteral(red: 0.9975082278, green: 0.8373187184, blue: 0.8360101581, alpha: 1))
         
         // config for sf symbol image
-        let config = UIImage.SymbolConfiguration(pointSize: 40)
+        let config = UIImage.SymbolConfiguration(pointSize: 30)
         button.tintColor = UIColor(#colorLiteral(red: 0.3531352282, green: 0.1171852872, blue: 0.1062337533, alpha: 1))
-        button.setImage(UIImage(systemName: "ellipsis", withConfiguration: config), for: .normal)
+        button.setImage(UIImage(systemName: "goforward", withConfiguration: config), for: .normal)
         return button
     }()
     

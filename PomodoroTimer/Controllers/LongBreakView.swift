@@ -57,9 +57,9 @@ class LongBreakView: UIView {
         button.backgroundColor = UIColor(#colorLiteral(red: 0.8524134755, green: 0.9345655441, blue: 0.9989190698, alpha: 1))
         
         // config for sf symbol image
-        let config = UIImage.SymbolConfiguration(pointSize: 40)
+        let config = UIImage.SymbolConfiguration(pointSize: 30)
         button.tintColor = UIColor(#colorLiteral(red: 0.0629010275, green: 0.176664263, blue: 0.2704711854, alpha: 1))
-        button.setImage(UIImage(systemName: "ellipsis", withConfiguration: config), for: .normal)
+        button.setImage(UIImage(systemName: "goforward", withConfiguration: config), for: .normal)
         return button
     }()
     

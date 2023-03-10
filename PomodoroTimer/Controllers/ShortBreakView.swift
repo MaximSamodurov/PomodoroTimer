@@ -57,9 +57,9 @@ class ShortBreakView: UIView {
         button.backgroundColor = UIColor(#colorLiteral(red: 0.8539052606, green: 0.9821388125, blue: 0.8786407709, alpha: 1))
         
         // config for sf symbol image
-        let config = UIImage.SymbolConfiguration(pointSize: 40)
+        let config = UIImage.SymbolConfiguration(pointSize: 30)
         button.tintColor = UIColor(#colorLiteral(red: 0.08071897179, green: 0.2525621951, blue: 0.1145745888, alpha: 1))
-        button.setImage(UIImage(systemName: "ellipsis", withConfiguration: config), for: .normal)
+        button.setImage(UIImage(systemName: "goforward", withConfiguration: config), for: .normal)
         return button
     }()
     

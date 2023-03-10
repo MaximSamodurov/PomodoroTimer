@@ -25,6 +25,7 @@ class FocusController: UIViewController {
         focusView.fillSuperview()
         focusView.pausePlayButton.addTarget(self, action: #selector(playPause), for: .touchUpInside)
         focusView.nextSectionButton.addTarget(self, action: #selector(nextSection), for: .touchUpInside)
+        focusView.threeDotsButton.addTarget(self, action: #selector(openPopupMenu), for: .touchUpInside)
     }
     
     func updateTimeLable() {
@@ -72,6 +73,10 @@ class FocusController: UIViewController {
         let destinationVC = ShortBreakController()
         self.present(destinationVC, animated: true)
         print("tapped")
+    }
+    
+    @objc func openPopupMenu() {
+        print("openPopupMenu")
     }
 }
 
