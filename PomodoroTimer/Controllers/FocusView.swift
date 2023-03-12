@@ -72,8 +72,8 @@ class FocusView: UIView {
         // config for sf symbol image
         let config = UIImage.SymbolConfiguration(pointSize: 23)
         button.tintColor = UIColor(#colorLiteral(red: 0.3531352282, green: 0.1171852872, blue: 0.1062337533, alpha: 1))
-//        button.setImage(UIImage(systemName: "play.fill", withConfiguration: config), for: .normal)
-        button.setImage(UIImage(systemName: "pause.fill", withConfiguration: config), for: .normal)
+        button.setImage(UIImage(systemName: "play.fill", withConfiguration: config), for: .normal)
+//        button.setImage(UIImage(systemName: "pause.fill", withConfiguration: config), for: .normal)
         return button
     }()
     
