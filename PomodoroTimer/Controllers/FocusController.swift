@@ -80,19 +80,28 @@ class FocusController: UIViewController {
         }
     }
     
+    
     func startTimer(){
         timer = Timer.scheduledTimer(timeInterval: 1.0, target: self, selector: #selector(refreshValue), userInfo: nil, repeats: true)
-        setIsCounting(true)
-        setStartTime(date: Date())
         focusView.pausePlayButton.setImage(UIImage(systemName: "pause.fill", withConfiguration: config), for: .normal)
+        setIsCounting(true)
+        
+        
+        if let second = secondsPassed {
+            if second != 0 {
+                return
+            }
+        } else {
+            // баг был вот тут. вот эта хуйня была просто прописана без каких либо условий и она всегда сбивала на нуль. 5 строк выше с if let second = secondsPassed не было!
+            setStartTime(date: Date())
+        }
     }
     
     func stopTimer(){
+        focusView.pausePlayButton.setImage(UIImage(systemName: "play.fill", withConfiguration: config), for: .normal)
         if timer != nil {
             timer.invalidate() }
         setIsCounting(false)
-        focusView.pausePlayButton.setImage(UIImage(systemName: "play.fill", withConfiguration: config), for: .normal)
-        
     }
     
     func calcRestartTime(start: Date, stop: Date) -> Date
@@ -103,6 +112,7 @@ class FocusController: UIViewController {
     
     @objc func playPause() {
         if isCounting {
+                // куда деть строку ниже, может засунуть в stopTimer()?
             setStopTime(date: Date())
             stopTimer()
         } else {
@@ -110,7 +120,7 @@ class FocusController: UIViewController {
                 let restartTime = calcRestartTime(start: startTime!, stop: stop)
                 setStopTime(date: nil)
                 setStartTime(date: restartTime)
-            } else {
+            }  else {
                 setStartTime(date: Date())
             }
             startTimer()
