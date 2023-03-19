@@ -39,20 +39,6 @@ class FocusController: UIViewController {
         focusView.fillSuperview()
         focusView.pausePlayButton.addTarget(self, action: #selector(playPause), for: .touchUpInside)
         focusView.nextSectionButton.addTarget(self, action: #selector(nextSection), for: .touchUpInside)
-<<<<<<< HEAD
-        focusView.threeDotsButton.addTarget(self, action: #selector(openPopupMenu), for: .touchUpInside)
-    }
-    
-    func updateTimeLable() {
-        if timer25["minutes"]! == 0 && timer25["seconds"]! == 0 {
-            self.timer.invalidate()
-            print("FINISH!")
-            return
-        }
-        if timer25["seconds"]! == 0 {
-            timer25["minutes"]! -= 1
-            timer25["seconds"]! = 59
-=======
         focusView.timeMinutesCounter.text = String(format: "%02d", minutesOnClock)
         focusView.timeSecondsCounter.text = String(format: "%02d", secondsOnClock)
         
@@ -64,7 +50,6 @@ class FocusController: UIViewController {
         
         if isCounting {
             startTimer()
->>>>>>> 7201c5d (fix background work of app.)
         } else {
             stopTimer()
             if let start = startTime {
@@ -112,7 +97,7 @@ class FocusController: UIViewController {
     
     @objc func playPause() {
         if isCounting {
-                // куда деть строку ниже, может засунуть в stopTimer()?
+            // куда деть строку ниже, может засунуть в stopTimer()?
             setStopTime(date: Date())
             stopTimer()
         } else {
@@ -128,7 +113,7 @@ class FocusController: UIViewController {
     }
     
     func setTimeLabel(_ val: Int) {
-//        let time = secondsToMinutesSeconds(val)
+        //        let time = secondsToMinutesSeconds(val)
         if isCounting {
             secondsPassed = val
             SetSecondsPassed(secondsPassed)
@@ -149,11 +134,11 @@ class FocusController: UIViewController {
         focusView.timeSecondsCounter.text = String(format: "%02d", secondsOnClock)
     }
     
-//    func secondsToMinutesSeconds(_ ms: Int) -> (Int, Int) {
-//        let min = (ms % 3600) / 60
-//        let sec = (ms % 3600) % 60
-//        return (min, sec)
-//    }
+    //    func secondsToMinutesSeconds(_ ms: Int) -> (Int, Int) {
+    //        let min = (ms % 3600) / 60
+    //        let sec = (ms % 3600) % 60
+    //        return (min, sec)
+    //    }
     
     //MARK: – @objc funcs
     @objc func refreshValue() {
@@ -177,10 +162,11 @@ class FocusController: UIViewController {
         print("tapped")
     }
     
-<<<<<<< HEAD
+    
     @objc func openPopupMenu() {
         print("openPopupMenu")
-=======
+    }
+    
     //MARK: – set user defaults Keys
     func setStartTime(date: Date?){
         startTime = date
@@ -209,6 +195,6 @@ class FocusController: UIViewController {
         secondsLeft = sec
         userDefaults.set(secondsLeft, forKey: SecondsLeftKey)
         print("Seconds Left: \(String(describing: userDefaults.integer(forKey: SecondsLeftKey)))")
->>>>>>> 7201c5d (fix background work of app.)
+        
     }
 }
