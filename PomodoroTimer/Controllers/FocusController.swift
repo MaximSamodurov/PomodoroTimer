@@ -18,7 +18,6 @@ class FocusController: UIViewController {
     var secondsOnClock: Int = 0
     
     var secondsLeft: Int?
-    var secondsPassed: Int?
     var isCounting = false
     var startTime: Date?
     var stopTime: Date?
@@ -27,8 +26,6 @@ class FocusController: UIViewController {
     let StartTimeKey = "startTime"
     let StopTimeKey = "stopTime"
     let CountingKey = "countingKey"
-    let SecondsPassedKey = "secondsPassedKey"
-    let SecondsLeftKey = "secondsLeftKey"
     
     let config = UIImage.SymbolConfiguration(pointSize: 23)
     
@@ -47,8 +44,6 @@ class FocusController: UIViewController {
         startTime = userDefaults.object(forKey: StartTimeKey) as? Date
         stopTime = userDefaults.object(forKey: StopTimeKey) as? Date
         isCounting = userDefaults.bool(forKey: CountingKey)
-        secondsPassed = userDefaults.integer(forKey: SecondsPassedKey)
-        secondsLeft = userDefaults.integer(forKey: SecondsLeftKey)
         
         if isCounting {
             startTimer()
@@ -69,30 +64,20 @@ class FocusController: UIViewController {
     
     
     func startTimer(){
-        timer = Timer.scheduledTimer(timeInterval: 1.0, target: self, selector: #selector(refreshValue), userInfo: nil, repeats: true)
+        timer = Timer.scheduledTimer(timeInterval: 0.5, target: self, selector: #selector(refreshValue), userInfo: nil, repeats: true)
         focusView.pausePlayButton.setImage(UIImage(systemName: "pause.fill", withConfiguration: config), for: .normal)
         setIsCounting(true)
-        
-        
-        if let second = secondsPassed {
-            if second != 0 {
-                return
-            }
-        } else {
-            // баг был вот тут. вот эта хуйня была просто прописана без каких либо условий и она всегда сбивала на нуль. 5 строк выше с if let second = secondsPassed не было!
-            setStartTime(date: Date())
-        }
     }
     
     func stopTimer(){
         focusView.pausePlayButton.setImage(UIImage(systemName: "play.fill", withConfiguration: config), for: .normal)
         if timer != nil {
-            timer.invalidate() }
+            timer.invalidate()
+        }
         setIsCounting(false)
     }
     
-    func calcRestartTime(start: Date, stop: Date) -> Date
-    {
+    func calcRestartTime(start: Date, stop: Date) -> Date {
         let diff = start.timeIntervalSince(stop)
         return Date().addingTimeInterval(diff)
     }
@@ -101,7 +86,7 @@ class FocusController: UIViewController {
         
         setStopTime(date: nil)
         setStartTime(date: nil)
-//        timeLabel.text = makeTimeString(hour: 0, min: 0, sec: 0)
+        //        timeLabel.text = makeTimeString(hour: 0, min: 0, sec: 0)
         stopTimer()
         minutesOnClock = 25
         secondsOnClock = 00
@@ -127,32 +112,16 @@ class FocusController: UIViewController {
     }
     
     func setTimeLabel(_ val: Int) {
-        //        let time = secondsToMinutesSeconds(val)
-        if isCounting {
-            secondsPassed = val
-            SetSecondsPassed(secondsPassed)
-        } else {
-            secondsPassed = userDefaults.integer(forKey:SecondsPassedKey)
-        }
         
-        
-        secondsLeft = totalTimeInSecondsIs - secondsPassed!
-        SetSecondsLeft(secondsLeft)
-        
+        secondsLeft = totalTimeInSecondsIs - val
         minutesOnClock = secondsLeft! / 60
         secondsOnClock = secondsLeft! % 60
         
-        print("it means \(minutesOnClock):\(secondsOnClock) left")
+//        print("it means \(minutesOnClock):\(secondsOnClock) left")
         
         focusView.timeMinutesCounter.text = String(format: "%02d", minutesOnClock)
         focusView.timeSecondsCounter.text = String(format: "%02d", secondsOnClock)
     }
-    
-    //    func secondsToMinutesSeconds(_ ms: Int) -> (Int, Int) {
-    //        let min = (ms % 3600) / 60
-    //        let sec = (ms % 3600) % 60
-    //        return (min, sec)
-    //    }
     
     //MARK: – @objc funcs
     @objc func refreshValue() {
@@ -161,12 +130,7 @@ class FocusController: UIViewController {
             setTimeLabel(Int(diff))
         } else {
             stopTimer()
-            if let seconds = secondsPassed {
-                setTimeLabel(seconds)
-            } else {
-                setTimeLabel(0)
-            }
-            
+            setTimeLabel(0)
         }
     }
     
@@ -185,30 +149,17 @@ class FocusController: UIViewController {
     func setStartTime(date: Date?){
         startTime = date
         userDefaults.set(startTime, forKey: StartTimeKey)
-//        print("StartTime is \(String(describing: userDefaults.object(forKey: StartTimeKey)!))")
+        //        print("StartTime is \(String(describing: userDefaults.object(forKey: StartTimeKey)!))")
     }
     
     func setStopTime(date: Date?){
         stopTime = date
         userDefaults.set(stopTime, forKey: StopTimeKey)
-//        print("StopTime is \(String(describing: userDefaults.object(forKey: StopTimeKey)))")
+        //        print("StopTime is \(String(describing: userDefaults.object(forKey: StopTimeKey)))")
     }
     func setIsCounting(_ val: Bool){
         isCounting = val
         userDefaults.set(isCounting, forKey: CountingKey)
-//        print("IsCounting is \(String(describing: userDefaults.object(forKey: CountingKey)!))")
-    }
-    
-    func SetSecondsPassed(_ sec: Int?){
-        secondsPassed = sec
-        userDefaults.set(secondsPassed, forKey: SecondsPassedKey)
-//        print("Seconds Passed: \(String(describing: userDefaults.integer(forKey: SecondsPassedKey)))")
-    }
-    
-    func SetSecondsLeft(_ sec: Int?){
-        secondsLeft = sec
-        userDefaults.set(secondsLeft, forKey: SecondsLeftKey)
-//        print("Seconds Left: \(String(describing: userDefaults.integer(forKey: SecondsLeftKey)))")
-        
+        //        print("IsCounting is \(String(describing: userDefaults.object(forKey: CountingKey)!))")
     }
 }
