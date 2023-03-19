@@ -39,6 +39,8 @@ class FocusController: UIViewController {
         focusView.fillSuperview()
         focusView.pausePlayButton.addTarget(self, action: #selector(playPause), for: .touchUpInside)
         focusView.nextSectionButton.addTarget(self, action: #selector(nextSection), for: .touchUpInside)
+        focusView.threeDotsButton.addTarget(self, action: #selector(resetTimer), for: .touchUpInside)
+        
         focusView.timeMinutesCounter.text = String(format: "%02d", minutesOnClock)
         focusView.timeSecondsCounter.text = String(format: "%02d", secondsOnClock)
         
@@ -93,6 +95,18 @@ class FocusController: UIViewController {
     {
         let diff = start.timeIntervalSince(stop)
         return Date().addingTimeInterval(diff)
+    }
+    
+    @objc func resetTimer() {
+        
+        setStopTime(date: nil)
+        setStartTime(date: nil)
+//        timeLabel.text = makeTimeString(hour: 0, min: 0, sec: 0)
+        stopTimer()
+        minutesOnClock = 25
+        secondsOnClock = 00
+        focusView.timeMinutesCounter.text = String(format: "%02d", minutesOnClock)
+        focusView.timeSecondsCounter.text = String(format: "%02d", secondsOnClock)
     }
     
     @objc func playPause() {
@@ -171,30 +185,30 @@ class FocusController: UIViewController {
     func setStartTime(date: Date?){
         startTime = date
         userDefaults.set(startTime, forKey: StartTimeKey)
-        print("StartTime is \(String(describing: userDefaults.object(forKey: StartTimeKey)!))")
+//        print("StartTime is \(String(describing: userDefaults.object(forKey: StartTimeKey)!))")
     }
     
     func setStopTime(date: Date?){
         stopTime = date
         userDefaults.set(stopTime, forKey: StopTimeKey)
-        print("StopTime is \(String(describing: userDefaults.object(forKey: StopTimeKey)))")
+//        print("StopTime is \(String(describing: userDefaults.object(forKey: StopTimeKey)))")
     }
     func setIsCounting(_ val: Bool){
         isCounting = val
         userDefaults.set(isCounting, forKey: CountingKey)
-        print("IsCounting is \(String(describing: userDefaults.object(forKey: CountingKey)!))")
+//        print("IsCounting is \(String(describing: userDefaults.object(forKey: CountingKey)!))")
     }
     
     func SetSecondsPassed(_ sec: Int?){
         secondsPassed = sec
         userDefaults.set(secondsPassed, forKey: SecondsPassedKey)
-        print("Seconds Passed: \(String(describing: userDefaults.integer(forKey: SecondsPassedKey)))")
+//        print("Seconds Passed: \(String(describing: userDefaults.integer(forKey: SecondsPassedKey)))")
     }
     
     func SetSecondsLeft(_ sec: Int?){
         secondsLeft = sec
         userDefaults.set(secondsLeft, forKey: SecondsLeftKey)
-        print("Seconds Left: \(String(describing: userDefaults.integer(forKey: SecondsLeftKey)))")
+//        print("Seconds Left: \(String(describing: userDefaults.integer(forKey: SecondsLeftKey)))")
         
     }
 }
