@@ -10,7 +10,6 @@
 		B212B45629B9EFD80018990C /* ShortBreakView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B212B45529B9EFD80018990C /* ShortBreakView.swift */; };
 		B212B45829B9F2400018990C /* ShortBreakController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B212B45729B9F2400018990C /* ShortBreakController.swift */; };
 		B227898329B1D5FE009C9BE4 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B227898229B1D5FE009C9BE4 /* AppDelegate.swift */; };
-		B227898729B1D5FE009C9BE4 /* FocusController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B227898629B1D5FE009C9BE4 /* FocusController.swift */; };
 		B227898D29B1D5FE009C9BE4 /* PomodoroTimer.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = B227898B29B1D5FE009C9BE4 /* PomodoroTimer.xcdatamodeld */; };
 		B227898F29B1D601009C9BE4 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B227898E29B1D601009C9BE4 /* Assets.xcassets */; };
 		B227899229B1D601009C9BE4 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B227899029B1D601009C9BE4 /* LaunchScreen.storyboard */; };
@@ -25,6 +24,7 @@
 		B28D4B7329B9F7A000B084B5 /* LongBreakViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B28D4B7229B9F7A000B084B5 /* LongBreakViewController.swift */; };
 		B28D4B7529B9F7FC00B084B5 /* LongBreakView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B28D4B7429B9F7FC00B084B5 /* LongBreakView.swift */; };
 		B293498A29B3A24A0076C166 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B293498929B3A24A0076C166 /* Main.storyboard */; };
+		B2B2317C29C85E2B00834637 /* FocusController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2B2317B29C85E2B00834637 /* FocusController.swift */; };
 		B2C0C5E929B5D1300016BC7E /* Roboto-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = B2C0C5E829B5D1300016BC7E /* Roboto-Bold.ttf */; };
 		B2C0C5EB29B5D3B30016BC7E /* Fonts.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2C0C5EA29B5D3B30016BC7E /* Fonts.swift */; };
 		B2C0C5ED29B5D5D00016BC7E /* RobotoFlex-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = B2C0C5EC29B5D5D00016BC7E /* RobotoFlex-Regular.ttf */; };
@@ -36,7 +36,6 @@
 		B212B45729B9F2400018990C /* ShortBreakController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShortBreakController.swift; sourceTree = "<group>"; };
 		B227897F29B1D5FE009C9BE4 /* PomodoroTimer.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = PomodoroTimer.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		B227898229B1D5FE009C9BE4 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		B227898629B1D5FE009C9BE4 /* FocusController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FocusController.swift; sourceTree = "<group>"; };
 		B227898C29B1D5FE009C9BE4 /* PomodoroTimer.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = PomodoroTimer.xcdatamodel; sourceTree = "<group>"; };
 		B227898E29B1D601009C9BE4 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		B227899129B1D601009C9BE4 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
@@ -52,6 +51,7 @@
 		B28D4B7229B9F7A000B084B5 /* LongBreakViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LongBreakViewController.swift; sourceTree = "<group>"; };
 		B28D4B7429B9F7FC00B084B5 /* LongBreakView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LongBreakView.swift; sourceTree = "<group>"; };
 		B293498929B3A24A0076C166 /* Main.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Main.storyboard; sourceTree = "<group>"; };
+		B2B2317B29C85E2B00834637 /* FocusController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FocusController.swift; sourceTree = "<group>"; };
 		B2C0C5E829B5D1300016BC7E /* Roboto-Bold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Roboto-Bold.ttf"; sourceTree = "<group>"; };
 		B2C0C5EA29B5D3B30016BC7E /* Fonts.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Fonts.swift; sourceTree = "<group>"; };
 		B2C0C5EC29B5D5D00016BC7E /* RobotoFlex-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "RobotoFlex-Regular.ttf"; sourceTree = "<group>"; };
@@ -106,7 +106,7 @@
 		B227899929B1E72D009C9BE4 /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
-				B227898629B1D5FE009C9BE4 /* FocusController.swift */,
+				B2B2317B29C85E2B00834637 /* FocusController.swift */,
 				B212B45729B9F2400018990C /* ShortBreakController.swift */,
 				B28D4B7229B9F7A000B084B5 /* LongBreakViewController.swift */,
 				B23BCE6D29BB2B520076821E /* SettingsController .swift */,
@@ -239,10 +239,10 @@
 			buildActionMask = 2147483647;
 			files = (
 				B23BCE7229BB5A0D0076821E /* SettingsModel.swift in Sources */,
-				B227898729B1D5FE009C9BE4 /* FocusController.swift in Sources */,
 				B22789A329B1E9C3009C9BE4 /* Extensions.swift in Sources */,
 				B28D4B7529B9F7FC00B084B5 /* LongBreakView.swift in Sources */,
 				B28D4B7329B9F7A000B084B5 /* LongBreakViewController.swift in Sources */,
+				B2B2317C29C85E2B00834637 /* FocusController.swift in Sources */,
 				B23BCE6C29BB291E0076821E /* BaseTabController.swift in Sources */,
 				B227898329B1D5FE009C9BE4 /* AppDelegate.swift in Sources */,
 				B23BCE7029BB2C130076821E /* SettingsView.swift in Sources */,
