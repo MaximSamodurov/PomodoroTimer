@@ -117,7 +117,7 @@ class FocusController: UIViewController {
         minutesOnClock = secondsLeft! / 60
         secondsOnClock = secondsLeft! % 60
         
-//        print("it means \(minutesOnClock):\(secondsOnClock) left")
+        //        print("it means \(minutesOnClock):\(secondsOnClock) left")
         
         focusView.timeMinutesCounter.text = String(format: "%02d", minutesOnClock)
         focusView.timeSecondsCounter.text = String(format: "%02d", secondsOnClock)
@@ -162,4 +162,5 @@ class FocusController: UIViewController {
         userDefaults.set(isCounting, forKey: CountingKey)
         //        print("IsCounting is \(String(describing: userDefaults.object(forKey: CountingKey)!))")
     }
+// тест тест 🔫
 }
