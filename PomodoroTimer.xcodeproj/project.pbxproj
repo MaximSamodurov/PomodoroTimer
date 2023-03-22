@@ -25,6 +25,7 @@
 		B28D4B7529B9F7FC00B084B5 /* LongBreakView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B28D4B7429B9F7FC00B084B5 /* LongBreakView.swift */; };
 		B293498A29B3A24A0076C166 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B293498929B3A24A0076C166 /* Main.storyboard */; };
 		B2B2317C29C85E2B00834637 /* FocusController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2B2317B29C85E2B00834637 /* FocusController.swift */; };
+		B2B2317E29C9B3D700834637 /* StepperView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2B2317D29C9B3D700834637 /* StepperView.swift */; };
 		B2C0C5E929B5D1300016BC7E /* Roboto-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = B2C0C5E829B5D1300016BC7E /* Roboto-Bold.ttf */; };
 		B2C0C5EB29B5D3B30016BC7E /* Fonts.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2C0C5EA29B5D3B30016BC7E /* Fonts.swift */; };
 		B2C0C5ED29B5D5D00016BC7E /* RobotoFlex-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = B2C0C5EC29B5D5D00016BC7E /* RobotoFlex-Regular.ttf */; };
@@ -52,6 +53,7 @@
 		B28D4B7429B9F7FC00B084B5 /* LongBreakView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LongBreakView.swift; sourceTree = "<group>"; };
 		B293498929B3A24A0076C166 /* Main.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Main.storyboard; sourceTree = "<group>"; };
 		B2B2317B29C85E2B00834637 /* FocusController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FocusController.swift; sourceTree = "<group>"; };
+		B2B2317D29C9B3D700834637 /* StepperView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StepperView.swift; sourceTree = "<group>"; };
 		B2C0C5E829B5D1300016BC7E /* Roboto-Bold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Roboto-Bold.ttf"; sourceTree = "<group>"; };
 		B2C0C5EA29B5D3B30016BC7E /* Fonts.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Fonts.swift; sourceTree = "<group>"; };
 		B2C0C5EC29B5D5D00016BC7E /* RobotoFlex-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "RobotoFlex-Regular.ttf"; sourceTree = "<group>"; };
@@ -122,6 +124,7 @@
 				B212B45529B9EFD80018990C /* ShortBreakView.swift */,
 				B28D4B7429B9F7FC00B084B5 /* LongBreakView.swift */,
 				B23BCE6F29BB2C130076821E /* SettingsView.swift */,
+				B2B2317D29C9B3D700834637 /* StepperView.swift */,
 			);
 			name = Views;
 			path = Controllers;
@@ -248,6 +251,7 @@
 				B23BCE7029BB2C130076821E /* SettingsView.swift in Sources */,
 				B227898D29B1D5FE009C9BE4 /* PomodoroTimer.xcdatamodeld in Sources */,
 				B23BCE6E29BB2B520076821E /* SettingsController .swift in Sources */,
+				B2B2317E29C9B3D700834637 /* StepperView.swift in Sources */,
 				B227899C29B1E750009C9BE4 /* FocusView.swift in Sources */,
 				B2C0C5EB29B5D3B30016BC7E /* Fonts.swift in Sources */,
 				B212B45829B9F2400018990C /* ShortBreakController.swift in Sources */,
