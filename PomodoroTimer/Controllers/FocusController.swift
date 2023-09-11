@@ -23,9 +23,9 @@ class FocusController: UIViewController {
     var stopTime: Date?
     
     let userDefaults = UserDefaults.standard
-    let StartTimeKey = "startTime"
-    let StopTimeKey = "stopTime"
-    let CountingKey = "countingKey"
+    let StartTimeKey = "focusStartTime"
+    let StopTimeKey = "focusStopTime"
+    let CountingKey = "focusCountingKey"
     
     let config = UIImage.SymbolConfiguration(pointSize: 23)
     
@@ -135,6 +135,7 @@ class FocusController: UIViewController {
     }
     
     @objc func nextSection() {
+        stopTimer()
         let destinationVC = ShortBreakController()
         self.present(destinationVC, animated: true)
         print("tapped")

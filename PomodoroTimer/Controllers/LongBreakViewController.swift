@@ -12,57 +12,35 @@ class LongBreakViewController: UIViewController {
     let longBreakView = LongBreakView(frame: CGRect.zero)
 
     var timer = Timer()
-    var timesOfTimer = ["work": 25, "breaktime": 5]
-    var timer25 = ["minutes": 24, "seconds": 59]
-    var totalTime = 24*60
-    var secondsPassed = 0
-    var isCounting: Bool = false
-
+    let totalTimeInSecondsIs = 20*60
+    
+    var minutesOnClock: Int = 0
+    var secondsOnClock: Int = 0
+    
+    var secondsLeft: Int?
+    var isCounting = false
+    var startTime: Date?
+    var stopTime: Date?
+    
+    let userDefaults = UserDefaults.standard
+    let StartTimeKey = "longBreakStartTime"
+    let StopTimeKey = "longBreakStopTime"
+    let CountingKey = "longBreakCountingKey"
     
     override func viewDidLoad() {
         super.viewDidLoad()
         view.addSubview(longBreakView)
         longBreakView.fillSuperview()
         longBreakView.pausePlayButton.addTarget(self, action: #selector(playPause), for: .touchUpInside)
-    }
-    
-    func updateTimeLable() {
-        if timer25["minutes"]! == 0 && timer25["seconds"]! == 0 {
-            self.timer.invalidate()
-            print("FINISH!")
-            return
-        }
-        if timer25["seconds"]! == 0 {
-            timer25["minutes"]! -= 1
-            timer25["seconds"]! = 59
-        } else {
-            timer25["seconds"]! -= 1
-        }
-        
-        longBreakView.timeMinutesCounter.text = "\(timer25["minutes"]!)"
-        longBreakView.timeSecondsCounter.text = "\(timer25["seconds"]!)"
+        longBreakView.nextSectionButton.addTarget(self, action: #selector(nextSection), for: .touchUpInside)
     }
     
     @objc func playPause() {
-        //каждый раз как мы нажимаем на кнопку мы меняем global state isCounting
-        isCounting.toggle()
-        
-        //нажали на кнопку когда таймер не работал? тогда запускаем отсчет
-        if isCounting == true {
-            timer = Timer.scheduledTimer(withTimeInterval: 1.0, repeats: true) { (Timer) in
-                    //начинаем с защиты на дурака
-                if self.secondsPassed < self.totalTime {
-                    //дальше, что собственно делаем? отсчитываем secondsPassed для того чтобы таймер не считал в -
-                    self.secondsPassed += 1
-                    //запускаем функцию апдейта цифорок на экране
-                    self.updateTimeLable()
-                    //print("it's \(self.secondsPassed)")
-                }
-            }
-        // а если не запускали, то таймер на ноль, просто как предохранитель поставил.
-        } else {
-            timer.invalidate()
-        }
+    }
+    
+    @objc func nextSection() {
+        // Перейти к корневому UIViewController (находящемуся в UINavigationController).
+        dismiss(animated: true)
     }
 }
 
