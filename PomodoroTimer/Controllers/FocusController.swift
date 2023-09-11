@@ -29,6 +29,8 @@ class FocusController: UIViewController {
     
     let config = UIImage.SymbolConfiguration(pointSize: 23)
     
+    var focusTimeCount = 1
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -136,9 +138,17 @@ class FocusController: UIViewController {
     
     @objc func nextSection() {
         stopTimer()
-        let destinationVC = ShortBreakController()
-        self.present(destinationVC, animated: true)
-        print("tapped")
+        focusTimeCount += 1
+        
+        if focusTimeCount >= 4 { //if our goal is 4 Focus Times
+            let destinationVC = LongBreakViewController()
+            self.present(destinationVC, animated: true)
+            
+            focusTimeCount = 0
+        } else {
+            let destinationVC = ShortBreakController()
+            self.present(destinationVC, animated: true)
+        }
     }
     
     

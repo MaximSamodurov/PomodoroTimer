@@ -130,9 +130,10 @@ class ShortBreakController: UIViewController {
     }
     
     @objc func nextSection() {
-        let destinationVC = LongBreakViewController()
-        self.present(destinationVC, animated: true)
-        print("tapped")
+        dismiss(animated: true)
+//        let destinationVC = LongBreakViewController()
+//        self.present(destinationVC, animated: true)
+//        print("tapped")
     }
     
     @objc func openPopupMenu() {
