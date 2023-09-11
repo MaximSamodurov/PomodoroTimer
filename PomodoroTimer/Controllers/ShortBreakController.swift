@@ -10,12 +10,13 @@ import UIKit
 class ShortBreakController: UIViewController {
     
     let shortBreakView = ShortBreakView(frame: CGRect.zero)
+    var shortBreakCompletion: (() -> Void)?
 
     var timer = Timer()
-    let totalTimeInSecondsIs = 5*60
+    let totalTimeInSecondsIs = 5
     
-    var minutesOnClock: Int = 0
-    var secondsOnClock: Int = 0
+    var minutesOnClock: Int = 5
+    var secondsOnClock: Int = 00
     
     var secondsLeft: Int?
     var isCounting = false
@@ -35,29 +36,15 @@ class ShortBreakController: UIViewController {
         shortBreakView.fillSuperview()
         shortBreakView.pausePlayButton.addTarget(self, action: #selector(playPause), for: .touchUpInside)
         shortBreakView.nextSectionButton.addTarget(self, action: #selector(nextSection), for: .touchUpInside)
-//        focusView.threeDotsButton.addTarget(self, action: #selector(resetTimer), for: .touchUpInside)
+        shortBreakView.threeDotsButton.addTarget(self, action: #selector(resetTimer), for: .touchUpInside)
+        
         shortBreakView.timeMinutesCounter.text = String(format: "%02d", minutesOnClock)
         shortBreakView.timeSecondsCounter.text = String(format: "%02d", secondsOnClock)
         
-        startTime = userDefaults.object(forKey: StartTimeKey) as? Date
-        stopTime = userDefaults.object(forKey: StopTimeKey) as? Date
-        isCounting = userDefaults.bool(forKey: CountingKey)
-        
-        if isCounting {
-            startTimer()
-        } else {
-            stopTimer()
-            if let start = startTime {
-                print(start)
-                if let stop = stopTime {
-                    print(stop)
-                    //указываем разницу во времени тут
-                    let time = calcRestartTime(start: start, stop: stop)
-                    let diff = Date().timeIntervalSince(time)
-                    setTimeLabel(Int(diff))
-                }
-            }
-        }
+//        startTime = userDefaults.object(forKey: StartTimeKey) as? Date
+//        stopTime = userDefaults.object(forKey: StopTimeKey) as? Date
+//        isCounting = userDefaults.bool(forKey: CountingKey)
+//
     }
     
     func startTimer(){
@@ -83,9 +70,8 @@ class ShortBreakController: UIViewController {
         
         setStopTime(date: nil)
         setStartTime(date: nil)
-        //        timeLabel.text = makeTimeString(hour: 0, min: 0, sec: 0)
         stopTimer()
-        minutesOnClock = 25
+        minutesOnClock = 5
         secondsOnClock = 00
         shortBreakView.timeMinutesCounter.text = String(format: "%02d", minutesOnClock)
         shortBreakView.timeSecondsCounter.text = String(format: "%02d", secondsOnClock)
@@ -93,7 +79,6 @@ class ShortBreakController: UIViewController {
     
     @objc func playPause() {
         if isCounting {
-            // куда деть строку ниже, может засунуть в stopTimer()?
             setStopTime(date: Date())
             stopTimer()
         } else {
@@ -116,6 +101,10 @@ class ShortBreakController: UIViewController {
         
         shortBreakView.timeMinutesCounter.text = String(format: "%02d", minutesOnClock)
         shortBreakView.timeSecondsCounter.text = String(format: "%02d", secondsOnClock)
+        
+        if secondsLeft == 0 {
+            nextSection()
+        }
     }
     
     //MARK: – @objc funcs
@@ -130,10 +119,12 @@ class ShortBreakController: UIViewController {
     }
     
     @objc func nextSection() {
-        dismiss(animated: true)
-//        let destinationVC = LongBreakViewController()
-//        self.present(destinationVC, animated: true)
-//        print("tapped")
+        stopTimer()
+        // В момент завершения Short Break
+        self.dismiss(animated: true) { [weak self] in
+            // Вызываем замыкание при завершении анимации
+            self?.shortBreakCompletion?()
+        }
     }
     
     @objc func openPopupMenu() {
