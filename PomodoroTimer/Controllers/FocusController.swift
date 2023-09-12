@@ -12,10 +12,10 @@ class FocusController: UIViewController {
     let focusView = FocusView(frame: CGRect.zero)
     
     var timer: Timer!
-    let totalTimeInSecondsIs = 25*60
+    let totalTimeInSecondsIs = 5
     
-    var minutesOnClock: Int = 0
-    var secondsOnClock: Int = 0
+    var minutesOnClock: Int = 25
+    var secondsOnClock: Int = 00
     
     var secondsLeft: Int?
     var isCounting = false
@@ -23,11 +23,13 @@ class FocusController: UIViewController {
     var stopTime: Date?
     
     let userDefaults = UserDefaults.standard
-    let StartTimeKey = "startTime"
-    let StopTimeKey = "stopTime"
-    let CountingKey = "countingKey"
+    let StartTimeKey = "focusStartTime"
+    let StopTimeKey = "focusStopTime"
+    let CountingKey = "focusCountingKey"
     
     let config = UIImage.SymbolConfiguration(pointSize: 23)
+    
+    var focusTimeCount = 1
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -96,7 +98,6 @@ class FocusController: UIViewController {
     
     @objc func playPause() {
         if isCounting {
-            // куда деть строку ниже, может засунуть в stopTimer()?
             setStopTime(date: Date())
             stopTimer()
         } else {
@@ -117,10 +118,11 @@ class FocusController: UIViewController {
         minutesOnClock = secondsLeft! / 60
         secondsOnClock = secondsLeft! % 60
         
-//        print("it means \(minutesOnClock):\(secondsOnClock) left")
-        
         focusView.timeMinutesCounter.text = String(format: "%02d", minutesOnClock)
         focusView.timeSecondsCounter.text = String(format: "%02d", secondsOnClock)
+        if secondsLeft == 0 {
+            nextSection()
+        }
     }
     
     //MARK: – @objc funcs
@@ -135,9 +137,26 @@ class FocusController: UIViewController {
     }
     
     @objc func nextSection() {
-        let destinationVC = ShortBreakController()
-        self.present(destinationVC, animated: true)
-        print("tapped")
+        stopTimer()
+        focusTimeCount += 1
+        
+        if focusTimeCount >= 4 { //if our goal is 4 Focus Times
+            let longBreakVC = LongBreakViewController()
+            self.present(longBreakVC, animated: true)
+            longBreakVC.resetTimer()
+            longBreakVC.playPause()
+            focusTimeCount = 0
+        } else {
+            let shortBreakVC = ShortBreakController()
+            shortBreakVC.shortBreakCompletion = {
+                // код, который должен быть запущен после завершения ShortBreak
+                self.playPause()
+            }
+            // Показываем ShortBreakTimeViewController
+            self.present(shortBreakVC, animated: true, completion: nil)
+            shortBreakVC.resetTimer()
+            shortBreakVC.playPause()
+        }
     }
     
     
@@ -149,17 +168,14 @@ class FocusController: UIViewController {
     func setStartTime(date: Date?){
         startTime = date
         userDefaults.set(startTime, forKey: StartTimeKey)
-        //        print("StartTime is \(String(describing: userDefaults.object(forKey: StartTimeKey)!))")
     }
     
     func setStopTime(date: Date?){
         stopTime = date
         userDefaults.set(stopTime, forKey: StopTimeKey)
-        //        print("StopTime is \(String(describing: userDefaults.object(forKey: StopTimeKey)))")
     }
     func setIsCounting(_ val: Bool){
         isCounting = val
         userDefaults.set(isCounting, forKey: CountingKey)
-        //        print("IsCounting is \(String(describing: userDefaults.object(forKey: CountingKey)!))")
     }
 }

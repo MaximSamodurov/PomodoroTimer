@@ -12,57 +12,125 @@ class LongBreakViewController: UIViewController {
     let longBreakView = LongBreakView(frame: CGRect.zero)
 
     var timer = Timer()
-    var timesOfTimer = ["work": 25, "breaktime": 5]
-    var timer25 = ["minutes": 24, "seconds": 59]
-    var totalTime = 24*60
-    var secondsPassed = 0
-    var isCounting: Bool = false
-
+    let totalTimeInSecondsIs = 5
+    
+    var minutesOnClock: Int = 20
+    var secondsOnClock: Int = 00
+    
+    var secondsLeft: Int?
+    var isCounting = false
+    var startTime: Date?
+    var stopTime: Date?
+    
+    let userDefaults = UserDefaults.standard
+    let StartTimeKey = "longBreakStartTime"
+    let StopTimeKey = "longBreakStopTime"
+    let CountingKey = "longBreakCountingKey"
+    
+    let config = UIImage.SymbolConfiguration(pointSize: 23)
     
     override func viewDidLoad() {
         super.viewDidLoad()
         view.addSubview(longBreakView)
         longBreakView.fillSuperview()
         longBreakView.pausePlayButton.addTarget(self, action: #selector(playPause), for: .touchUpInside)
+        longBreakView.nextSectionButton.addTarget(self, action: #selector(nextSection), for: .touchUpInside)
+        
+        longBreakView.timeMinutesCounter.text = String(format: "%02d", minutesOnClock)
+        longBreakView.timeSecondsCounter.text = String(format: "%02d", secondsOnClock)
     }
     
-    func updateTimeLable() {
-        if timer25["minutes"]! == 0 && timer25["seconds"]! == 0 {
-            self.timer.invalidate()
-            print("FINISH!")
-            return
+    func startTimer(){
+        timer = Timer.scheduledTimer(timeInterval: 0.5, target: self, selector: #selector(refreshValue), userInfo: nil, repeats: true)
+        longBreakView.pausePlayButton.setImage(UIImage(systemName: "pause.fill", withConfiguration: config), for: .normal)
+        setIsCounting(true)
+    }
+    
+    func stopTimer(){
+        longBreakView.pausePlayButton.setImage(UIImage(systemName: "play.fill", withConfiguration: config), for: .normal)
+        if timer != nil {
+            timer.invalidate()
         }
-        if timer25["seconds"]! == 0 {
-            timer25["minutes"]! -= 1
-            timer25["seconds"]! = 59
-        } else {
-            timer25["seconds"]! -= 1
-        }
+        setIsCounting(false)
+    }
+    
+    func calcRestartTime(start: Date, stop: Date) -> Date {
+        let diff = start.timeIntervalSince(stop)
+        return Date().addingTimeInterval(diff)
+    }
+    
+    @objc func resetTimer() {
         
-        longBreakView.timeMinutesCounter.text = "\(timer25["minutes"]!)"
-        longBreakView.timeSecondsCounter.text = "\(timer25["seconds"]!)"
+        setStopTime(date: nil)
+        setStartTime(date: nil)
+        stopTimer()
+        minutesOnClock = 20
+        secondsOnClock = 00
+        longBreakView.timeMinutesCounter.text = String(format: "%02d", minutesOnClock)
+        longBreakView.timeSecondsCounter.text = String(format: "%02d", secondsOnClock)
     }
     
     @objc func playPause() {
-        //каждый раз как мы нажимаем на кнопку мы меняем global state isCounting
-        isCounting.toggle()
-        
-        //нажали на кнопку когда таймер не работал? тогда запускаем отсчет
-        if isCounting == true {
-            timer = Timer.scheduledTimer(withTimeInterval: 1.0, repeats: true) { (Timer) in
-                    //начинаем с защиты на дурака
-                if self.secondsPassed < self.totalTime {
-                    //дальше, что собственно делаем? отсчитываем secondsPassed для того чтобы таймер не считал в -
-                    self.secondsPassed += 1
-                    //запускаем функцию апдейта цифорок на экране
-                    self.updateTimeLable()
-                    //print("it's \(self.secondsPassed)")
-                }
-            }
-        // а если не запускали, то таймер на ноль, просто как предохранитель поставил.
+        if isCounting {
+            setStopTime(date: Date())
+            stopTimer()
         } else {
-            timer.invalidate()
+            if let stop = stopTime {
+                let restartTime = calcRestartTime(start: startTime!, stop: stop)
+                setStopTime(date: nil)
+                setStartTime(date: restartTime)
+            }  else {
+                setStartTime(date: Date())
+            }
+            startTimer()
         }
+    }
+
+    func setTimeLabel(_ val: Int) {
+        
+        secondsLeft = totalTimeInSecondsIs - val
+        minutesOnClock = secondsLeft! / 60
+        secondsOnClock = secondsLeft! % 60
+        
+        longBreakView.timeMinutesCounter.text = String(format: "%02d", minutesOnClock)
+        longBreakView.timeSecondsCounter.text = String(format: "%02d", secondsOnClock)
+        
+        if secondsLeft == 0 {
+            nextSection()
+        }
+    }
+    
+    //MARK: – @objc funcs
+    @objc func refreshValue() {
+        if let start = startTime {
+            let diff = Date().timeIntervalSince(start)
+            setTimeLabel(Int(diff))
+        } else {
+            stopTimer()
+            setTimeLabel(0)
+        }
+    }
+    
+    @objc func nextSection() {
+        stopTimer()
+        // Перейти к корневому UIViewController (находящемуся в UINavigationController).
+        dismiss(animated: true)
+    }
+    
+
+    //MARK: – set user defaults Keys
+    func setStartTime(date: Date?){
+        startTime = date
+        userDefaults.set(startTime, forKey: StartTimeKey)
+    }
+    
+    func setStopTime(date: Date?){
+        stopTime = date
+        userDefaults.set(stopTime, forKey: StopTimeKey)
+    }
+    func setIsCounting(_ val: Bool){
+        isCounting = val
+        userDefaults.set(isCounting, forKey: CountingKey)
     }
 }
 
