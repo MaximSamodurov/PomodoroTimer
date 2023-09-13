@@ -23,9 +23,6 @@ class LongBreakViewController: UIViewController {
     var stopTime: Date?
     
     let userDefaults = UserDefaults.standard
-    let StartTimeKey = "longBreakStartTime"
-    let StopTimeKey = "longBreakStopTime"
-    let CountingKey = "longBreakCountingKey"
     
     let config = UIImage.SymbolConfiguration(pointSize: 23)
     
@@ -121,16 +118,16 @@ class LongBreakViewController: UIViewController {
     //MARK: – set user defaults Keys
     func setStartTime(date: Date?){
         startTime = date
-        userDefaults.set(startTime, forKey: StartTimeKey)
+        userDefaults.set(startTime, forKey: K.longBreakStartTimeKey)
     }
     
     func setStopTime(date: Date?){
         stopTime = date
-        userDefaults.set(stopTime, forKey: StopTimeKey)
+        userDefaults.set(stopTime, forKey: K.longBreakStopTimeKey)
     }
     func setIsCounting(_ val: Bool){
         isCounting = val
-        userDefaults.set(isCounting, forKey: CountingKey)
+        userDefaults.set(isCounting, forKey: K.longBreakCountingKey)
     }
 }
 
