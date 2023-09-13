@@ -23,9 +23,6 @@ class FocusController: UIViewController {
     var stopTime: Date?
     
     let userDefaults = UserDefaults.standard
-    let StartTimeKey = "focusStartTime"
-    let StopTimeKey = "focusStopTime"
-    let CountingKey = "focusCountingKey"
     
     let config = UIImage.SymbolConfiguration(pointSize: 23)
     
@@ -43,9 +40,9 @@ class FocusController: UIViewController {
         focusView.timeMinutesCounter.text = String(format: "%02d", minutesOnClock)
         focusView.timeSecondsCounter.text = String(format: "%02d", secondsOnClock)
         
-        startTime = userDefaults.object(forKey: StartTimeKey) as? Date
-        stopTime = userDefaults.object(forKey: StopTimeKey) as? Date
-        isCounting = userDefaults.bool(forKey: CountingKey)
+        startTime = userDefaults.object(forKey: K.focusStartTimeKey) as? Date
+        stopTime = userDefaults.object(forKey: K.focusStopTimeKey) as? Date
+        isCounting = userDefaults.bool(forKey: K.focusCountingKey)
         
         if isCounting {
             startTimer()
@@ -88,7 +85,6 @@ class FocusController: UIViewController {
         
         setStopTime(date: nil)
         setStartTime(date: nil)
-        //        timeLabel.text = makeTimeString(hour: 0, min: 0, sec: 0)
         stopTimer()
         minutesOnClock = 25
         secondsOnClock = 00
@@ -167,15 +163,15 @@ class FocusController: UIViewController {
     //MARK: – set user defaults Keys
     func setStartTime(date: Date?){
         startTime = date
-        userDefaults.set(startTime, forKey: StartTimeKey)
+        userDefaults.set(startTime, forKey: K.focusStartTimeKey)
     }
     
     func setStopTime(date: Date?){
         stopTime = date
-        userDefaults.set(stopTime, forKey: StopTimeKey)
+        userDefaults.set(stopTime, forKey: K.focusStopTimeKey)
     }
     func setIsCounting(_ val: Bool){
         isCounting = val
-        userDefaults.set(isCounting, forKey: CountingKey)
+        userDefaults.set(isCounting, forKey: K.focusCountingKey)
     }
 }
