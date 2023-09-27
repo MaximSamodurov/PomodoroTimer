@@ -7,30 +7,28 @@
 
 import UIKit
 
-class ShortBreakController: UIViewController {
+class ShortBreakController: TimerController {
     
     let shortBreakView = ShortBreakView(frame: CGRect.zero)
     var shortBreakCompletion: (() -> Void)?
 
-    var timer = Timer()
-    let totalTimeInSecondsIs = 5
+    let aDecoder = NSCoder()
     
-    var minutesOnClock: Int = 5
-    var secondsOnClock: Int = 00
+    init() {
+        super.init(totalTimeInSeconds: 5 * 60, minutesOnClock: 5, secondsOnClock: 00, secondsLeft: 0, currentTimerName: "shortBreak")
+    }
     
-    var secondsLeft: Int?
-    var isCounting = false
-    var startTime: Date?
-    var stopTime: Date?
+    required init?(coder aDecoder: NSCoder) {
+        super.init(coder: aDecoder)
+    }
     
-    let userDefaults = UserDefaults.standard
 
-    let config = UIImage.SymbolConfiguration(pointSize: 23)
-    
     override func viewDidLoad() {
         super.viewDidLoad()
+        
         view.addSubview(shortBreakView)
         shortBreakView.fillSuperview()
+        
         shortBreakView.pausePlayButton.addTarget(self, action: #selector(playPause), for: .touchUpInside)
         shortBreakView.nextSectionButton.addTarget(self, action: #selector(nextSection), for: .touchUpInside)
         shortBreakView.threeDotsButton.addTarget(self, action: #selector(resetTimer), for: .touchUpInside)
@@ -38,84 +36,39 @@ class ShortBreakController: UIViewController {
         shortBreakView.timeMinutesCounter.text = String(format: "%02d", minutesOnClock)
         shortBreakView.timeSecondsCounter.text = String(format: "%02d", secondsOnClock)
         
-//        startTime = userDefaults.object(forKey: StartTimeKey) as? Date
-//        stopTime = userDefaults.object(forKey: StopTimeKey) as? Date
-//        isCounting = userDefaults.bool(forKey: CountingKey)
-//
+        startTime = userDefaults.object(forKey: K.shortBreakStartTimeKey) as? Date
+        stopTime = userDefaults.object(forKey: K.shortBreakStopTimeKey) as? Date
+        isCounting = userDefaults.bool(forKey: K.shortBreakCountingKey)
     }
     
-    func startTimer(){
-        timer = Timer.scheduledTimer(timeInterval: 0.5, target: self, selector: #selector(refreshValue), userInfo: nil, repeats: true)
+    override func startTimer(){
+        super.startTimer()
         shortBreakView.pausePlayButton.setImage(UIImage(systemName: "pause.fill", withConfiguration: config), for: .normal)
-        setIsCounting(true)
     }
     
-    func stopTimer(){
+    override func stopTimer() {
+        super.stopTimer()
         shortBreakView.pausePlayButton.setImage(UIImage(systemName: "play.fill", withConfiguration: config), for: .normal)
-        if timer != nil {
-            timer.invalidate()
-        }
-        setIsCounting(false)
-    }
-    
-    func calcRestartTime(start: Date, stop: Date) -> Date {
-        let diff = start.timeIntervalSince(stop)
-        return Date().addingTimeInterval(diff)
-    }
-    
-    @objc func resetTimer() {
-        
-        setStopTime(date: nil)
-        setStartTime(date: nil)
-        stopTimer()
-        minutesOnClock = 5
-        secondsOnClock = 00
-        shortBreakView.timeMinutesCounter.text = String(format: "%02d", minutesOnClock)
-        shortBreakView.timeSecondsCounter.text = String(format: "%02d", secondsOnClock)
-    }
-    
-    @objc func playPause() {
-        if isCounting {
-            setStopTime(date: Date())
-            stopTimer()
-        } else {
-            if let stop = stopTime {
-                let restartTime = calcRestartTime(start: startTime!, stop: stop)
-                setStopTime(date: nil)
-                setStartTime(date: restartTime)
-            }  else {
-                setStartTime(date: Date())
-            }
-            startTimer()
-        }
     }
 
-    func setTimeLabel(_ val: Int) {
-        
-        secondsLeft = totalTimeInSecondsIs - val
-        minutesOnClock = secondsLeft! / 60
-        secondsOnClock = secondsLeft! % 60
-        
+    @objc override func resetTimer() {
+        super.resetTimer()
         shortBreakView.timeMinutesCounter.text = String(format: "%02d", minutesOnClock)
         shortBreakView.timeSecondsCounter.text = String(format: "%02d", secondsOnClock)
-        
+    }
+
+    override func setTimeLabel(_ val: Int) {
+        super.setTimeLabel(val)
+
+        shortBreakView.timeMinutesCounter.text = String(format: "%02d", minutesOnClock)
+        shortBreakView.timeSecondsCounter.text = String(format: "%02d", secondsOnClock)
         if secondsLeft == 0 {
             nextSection()
         }
     }
-    
-    //MARK: – @objc funcs
-    @objc func refreshValue() {
-        if let start = startTime {
-            let diff = Date().timeIntervalSince(start)
-            setTimeLabel(Int(diff))
-        } else {
-            stopTimer()
-            setTimeLabel(0)
-        }
-    }
-    
-    @objc func nextSection() {
+
+    @objc override func nextSection() {
+        super.nextSection()
         stopTimer()
         // В момент завершения Short Break
         self.dismiss(animated: true) { [weak self] in
@@ -123,24 +76,4 @@ class ShortBreakController: UIViewController {
             self?.shortBreakCompletion?()
         }
     }
-    
-    @objc func openPopupMenu() {
-        print("openPopupMenu")
-    }
-    
-    //MARK: – set user defaults Keys
-    func setStartTime(date: Date?){
-        startTime = date
-        userDefaults.set(startTime, forKey: K.shortBreakStartTimeKey)
-    }
-    
-    func setStopTime(date: Date?){
-        stopTime = date
-        userDefaults.set(stopTime, forKey: K.shortBreakStopTimeKey)
-    }
-    func setIsCounting(_ val: Bool){
-        isCounting = val
-        userDefaults.set(isCounting, forKey: K.shortBreakCountingKey)
-    }
 }
-
