@@ -7,7 +7,7 @@
 
 import UIKit
 
-class FocusController: UIViewController {
+class FocusController: TimerController {
     
     let focusView = FocusView(frame: CGRect.zero)
     
@@ -18,13 +18,10 @@ class FocusController: UIViewController {
     var secondsOnClock: Int = 00
     
     var secondsLeft: Int?
-    var isCounting = false
-    var startTime: Date?
-    var stopTime: Date?
-    
-    let userDefaults = UserDefaults.standard
-    
-    let config = UIImage.SymbolConfiguration(pointSize: 23)
+//    var isCounting = false
+//    var startTime: Date?
+//    var stopTime: Date?
+//    let userDefaults = UserDefaults.standard
     
     var focusTimeCount = 1
     
@@ -33,6 +30,7 @@ class FocusController: UIViewController {
         
         view.addSubview(focusView)
         focusView.fillSuperview()
+
         focusView.pausePlayButton.addTarget(self, action: #selector(playPause), for: .touchUpInside)
         focusView.nextSectionButton.addTarget(self, action: #selector(nextSection), for: .touchUpInside)
         focusView.threeDotsButton.addTarget(self, action: #selector(resetTimer), for: .touchUpInside)
@@ -65,7 +63,7 @@ class FocusController: UIViewController {
     func startTimer(){
         timer = Timer.scheduledTimer(timeInterval: 0.5, target: self, selector: #selector(refreshValue), userInfo: nil, repeats: true)
         focusView.pausePlayButton.setImage(UIImage(systemName: "pause.fill", withConfiguration: config), for: .normal)
-        setIsCounting(true)
+        setIsCounting(true, timer: "focus")
     }
     
     func stopTimer(){
@@ -73,7 +71,7 @@ class FocusController: UIViewController {
         if timer != nil {
             timer.invalidate()
         }
-        setIsCounting(false)
+        setIsCounting(false, timer: "focus")
     }
     
     func calcRestartTime(start: Date, stop: Date) -> Date {
@@ -83,8 +81,8 @@ class FocusController: UIViewController {
     
     @objc func resetTimer() {
         
-        setStopTime(date: nil)
-        setStartTime(date: nil)
+        setStopTime(date: nil, timer: "focus")
+        setStartTime(date: nil, timer: "focus")
         stopTimer()
         minutesOnClock = 25
         secondsOnClock = 00
@@ -94,15 +92,15 @@ class FocusController: UIViewController {
     
     @objc func playPause() {
         if isCounting {
-            setStopTime(date: Date())
+            setStopTime(date: Date(), timer: "focus")
             stopTimer()
         } else {
             if let stop = stopTime {
                 let restartTime = calcRestartTime(start: startTime!, stop: stop)
-                setStopTime(date: nil)
-                setStartTime(date: restartTime)
+                setStopTime(date: nil, timer: "focus")
+                setStartTime(date: restartTime, timer: "focus")
             }  else {
-                setStartTime(date: Date())
+                setStartTime(date: Date(), timer: "focus")
             }
             startTimer()
         }
@@ -161,17 +159,17 @@ class FocusController: UIViewController {
     }
     
     //MARK: – set user defaults Keys
-    func setStartTime(date: Date?){
-        startTime = date
-        userDefaults.set(startTime, forKey: K.focusStartTimeKey)
-    }
-    
-    func setStopTime(date: Date?){
-        stopTime = date
-        userDefaults.set(stopTime, forKey: K.focusStopTimeKey)
-    }
-    func setIsCounting(_ val: Bool){
-        isCounting = val
-        userDefaults.set(isCounting, forKey: K.focusCountingKey)
-    }
+//    func setStartTime(date: Date?){
+//        startTime = date
+//        userDefaults.set(startTime, forKey: K.focusStartTimeKey)
+//    }
+//
+//    func setStopTime(date: Date?){
+//        stopTime = date
+//        userDefaults.set(stopTime, forKey: K.focusStopTimeKey)
+//    }
+//    func setIsCounting(_ val: Bool){
+//        isCounting = val
+//        userDefaults.set(isCounting, forKey: K.focusCountingKey)
+//    }
 }

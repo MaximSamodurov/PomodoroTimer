@@ -29,6 +29,7 @@
 		B2C0C5ED29B5D5D00016BC7E /* RobotoFlex-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = B2C0C5EC29B5D5D00016BC7E /* RobotoFlex-Regular.ttf */; };
 		B2C0C5F129B6417A0016BC7E /* Roboto-Black.ttf in Resources */ = {isa = PBXBuildFile; fileRef = B2C0C5F029B6417A0016BC7E /* Roboto-Black.ttf */; };
 		CEDA86082AB1FC1900CFBB1B /* K.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEDA86072AB1FC1900CFBB1B /* K.swift */; };
+		CEDA86102AB2150100CFBB1B /* TimerController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEDA860F2AB2150100CFBB1B /* TimerController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -56,6 +57,7 @@
 		B2C0C5EC29B5D5D00016BC7E /* RobotoFlex-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "RobotoFlex-Regular.ttf"; sourceTree = "<group>"; };
 		B2C0C5F029B6417A0016BC7E /* Roboto-Black.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Roboto-Black.ttf"; sourceTree = "<group>"; };
 		CEDA86072AB1FC1900CFBB1B /* K.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = K.swift; sourceTree = "<group>"; };
+		CEDA860F2AB2150100CFBB1B /* TimerController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimerController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -105,6 +107,7 @@
 		B227899929B1E72D009C9BE4 /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
+				CEDA860F2AB2150100CFBB1B /* TimerController.swift */,
 				B227898629B1D5FE009C9BE4 /* FocusController.swift */,
 				B212B45729B9F2400018990C /* ShortBreakController.swift */,
 				B28D4B7229B9F7A000B084B5 /* LongBreakViewController.swift */,
@@ -242,6 +245,7 @@
 				B227899C29B1E750009C9BE4 /* FocusView.swift in Sources */,
 				B2C0C5EB29B5D3B30016BC7E /* Fonts.swift in Sources */,
 				B212B45829B9F2400018990C /* ShortBreakController.swift in Sources */,
+				CEDA86102AB2150100CFBB1B /* TimerController.swift in Sources */,
 				B212B45629B9EFD80018990C /* ShortBreakView.swift in Sources */,
 				CEDA86082AB1FC1900CFBB1B /* K.swift in Sources */,
 				B22789A229B1E9C3009C9BE4 /* VerticalStackView.swift in Sources */,

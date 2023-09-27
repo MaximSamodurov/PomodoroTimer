@@ -7,7 +7,7 @@
 
 import UIKit
 
-class ShortBreakController: UIViewController {
+class ShortBreakController: TimerController {
     
     let shortBreakView = ShortBreakView(frame: CGRect.zero)
     var shortBreakCompletion: (() -> Void)?
@@ -19,13 +19,10 @@ class ShortBreakController: UIViewController {
     var secondsOnClock: Int = 00
     
     var secondsLeft: Int?
-    var isCounting = false
-    var startTime: Date?
-    var stopTime: Date?
-    
-    let userDefaults = UserDefaults.standard
-
-    let config = UIImage.SymbolConfiguration(pointSize: 23)
+//    var isCounting = false
+//    var startTime: Date?
+//    var stopTime: Date?
+//    let userDefaults = UserDefaults.standard
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -47,7 +44,7 @@ class ShortBreakController: UIViewController {
     func startTimer(){
         timer = Timer.scheduledTimer(timeInterval: 0.5, target: self, selector: #selector(refreshValue), userInfo: nil, repeats: true)
         shortBreakView.pausePlayButton.setImage(UIImage(systemName: "pause.fill", withConfiguration: config), for: .normal)
-        setIsCounting(true)
+        setIsCounting(true, timer: "shortBreak")
     }
     
     func stopTimer(){
@@ -55,7 +52,7 @@ class ShortBreakController: UIViewController {
         if timer != nil {
             timer.invalidate()
         }
-        setIsCounting(false)
+        setIsCounting(false, timer: "shortBreak")
     }
     
     func calcRestartTime(start: Date, stop: Date) -> Date {
@@ -65,8 +62,8 @@ class ShortBreakController: UIViewController {
     
     @objc func resetTimer() {
         
-        setStopTime(date: nil)
-        setStartTime(date: nil)
+        setStopTime(date: nil, timer: "shortBreak")
+        setStartTime(date: nil, timer: "shortBreak")
         stopTimer()
         minutesOnClock = 5
         secondsOnClock = 00
@@ -76,15 +73,15 @@ class ShortBreakController: UIViewController {
     
     @objc func playPause() {
         if isCounting {
-            setStopTime(date: Date())
+            setStopTime(date: Date(), timer: "shortBreak")
             stopTimer()
         } else {
             if let stop = stopTime {
                 let restartTime = calcRestartTime(start: startTime!, stop: stop)
-                setStopTime(date: nil)
-                setStartTime(date: restartTime)
+                setStopTime(date: nil, timer: "shortBreak")
+                setStartTime(date: restartTime, timer: "shortBreak")
             }  else {
-                setStartTime(date: Date())
+                setStartTime(date: Date(), timer: "shortBreak")
             }
             startTimer()
         }
@@ -128,19 +125,5 @@ class ShortBreakController: UIViewController {
         print("openPopupMenu")
     }
     
-    //MARK: – set user defaults Keys
-    func setStartTime(date: Date?){
-        startTime = date
-        userDefaults.set(startTime, forKey: K.shortBreakStartTimeKey)
-    }
-    
-    func setStopTime(date: Date?){
-        stopTime = date
-        userDefaults.set(stopTime, forKey: K.shortBreakStopTimeKey)
-    }
-    func setIsCounting(_ val: Bool){
-        isCounting = val
-        userDefaults.set(isCounting, forKey: K.shortBreakCountingKey)
-    }
 }
 

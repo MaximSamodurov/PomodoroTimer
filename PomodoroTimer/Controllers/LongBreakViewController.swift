@@ -7,7 +7,7 @@
 
 import UIKit
 
-class LongBreakViewController: UIViewController {
+class LongBreakViewController: TimerController {
     
     let longBreakView = LongBreakView(frame: CGRect.zero)
 
@@ -18,13 +18,11 @@ class LongBreakViewController: UIViewController {
     var secondsOnClock: Int = 00
     
     var secondsLeft: Int?
-    var isCounting = false
-    var startTime: Date?
-    var stopTime: Date?
-    
-    let userDefaults = UserDefaults.standard
-    
-    let config = UIImage.SymbolConfiguration(pointSize: 23)
+//    var isCounting = false
+//    var startTime: Date?
+//    var stopTime: Date?
+//
+//    let userDefaults = UserDefaults.standard
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -40,7 +38,7 @@ class LongBreakViewController: UIViewController {
     func startTimer(){
         timer = Timer.scheduledTimer(timeInterval: 0.5, target: self, selector: #selector(refreshValue), userInfo: nil, repeats: true)
         longBreakView.pausePlayButton.setImage(UIImage(systemName: "pause.fill", withConfiguration: config), for: .normal)
-        setIsCounting(true)
+        setIsCounting(true, timer: "longBreak")
     }
     
     func stopTimer(){
@@ -48,7 +46,7 @@ class LongBreakViewController: UIViewController {
         if timer != nil {
             timer.invalidate()
         }
-        setIsCounting(false)
+        setIsCounting(false, timer: "longBreak")
     }
     
     func calcRestartTime(start: Date, stop: Date) -> Date {
@@ -58,8 +56,8 @@ class LongBreakViewController: UIViewController {
     
     @objc func resetTimer() {
         
-        setStopTime(date: nil)
-        setStartTime(date: nil)
+        setStopTime(date: nil, timer: "longBreak")
+        setStartTime(date: nil, timer: "longBreak")
         stopTimer()
         minutesOnClock = 20
         secondsOnClock = 00
@@ -69,15 +67,15 @@ class LongBreakViewController: UIViewController {
     
     @objc func playPause() {
         if isCounting {
-            setStopTime(date: Date())
+            setStopTime(date: Date(), timer: "longBreak")
             stopTimer()
         } else {
             if let stop = stopTime {
                 let restartTime = calcRestartTime(start: startTime!, stop: stop)
-                setStopTime(date: nil)
-                setStartTime(date: restartTime)
+                setStopTime(date: nil, timer: "longBreak")
+                setStartTime(date: restartTime, timer: "longBreak")
             }  else {
-                setStartTime(date: Date())
+                setStartTime(date: Date(), timer: "longBreak")
             }
             startTimer()
         }
@@ -116,18 +114,18 @@ class LongBreakViewController: UIViewController {
     
 
     //MARK: – set user defaults Keys
-    func setStartTime(date: Date?){
-        startTime = date
-        userDefaults.set(startTime, forKey: K.longBreakStartTimeKey)
-    }
-    
-    func setStopTime(date: Date?){
-        stopTime = date
-        userDefaults.set(stopTime, forKey: K.longBreakStopTimeKey)
-    }
-    func setIsCounting(_ val: Bool){
-        isCounting = val
-        userDefaults.set(isCounting, forKey: K.longBreakCountingKey)
-    }
+//    func setStartTime(date: Date?){
+//        startTime = date
+//        userDefaults.set(startTime, forKey: K.longBreakStartTimeKey)
+//    }
+//
+//    func setStopTime(date: Date?){
+//        stopTime = date
+//        userDefaults.set(stopTime, forKey: K.longBreakStopTimeKey)
+//    }
+//    func setIsCounting(_ val: Bool){
+//        isCounting = val
+//        userDefaults.set(isCounting, forKey: K.longBreakCountingKey)
+//    }
 }
 
