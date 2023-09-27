@@ -8,120 +8,115 @@
 import UIKit
 
 class TimerController: UIViewController {
+    var timer: Timer?
     
-//    var timer: Timer?
-//    let totalTimeInSecondsIs: Int
-//
-//    var minutesOnClock: Int
-//    var secondsOnClock: Int
-//
-//    var secondsLeft: Int?
+    var totalTimeInSecondsIs: Int
+    var minutesOnClock: Int
+    var secondsOnClock: Int
+    var secondsLeft: Int?
+    
+    var currentTimerName: String
+    
     var isCounting = false
     var startTime: Date?
     var stopTime: Date?
-//
+    
     let userDefaults = UserDefaults.standard
-//
     let config = UIImage.SymbolConfiguration(pointSize: 23)
-//
-//    var focusTimeCount = 1
-//
-//    init(totalTimeInSeconds: Int, minutesOnClock: Int, secondsOnClock: Int) {
-//        self.totalTimeInSecondsIs = totalTimeInSeconds
-//        self.minutesOnClock = minutesOnClock
-//        self.secondsOnClock = secondsOnClock
-//        super.init(nibName: nil, bundle: nil)
-//    }
-//
-//    required init?(coder aDecoder: NSCoder) {
-//        fatalError("init(coder:) has not been implemented")
-//    }
-//
-//    override func viewDidLoad() {
-//        super.viewDidLoad()
-//
-//        startTime = userDefaults.object(forKey: K.focusStartTimeKey) as? Date
-//        stopTime = userDefaults.object(forKey: K.focusStopTimeKey) as? Date
-//        isCounting = userDefaults.bool(forKey: K.focusCountingKey)
-//
-//        if isCounting {
-//            startTimer()
-//        } else {
-//            stopTimer()
-//            if let start = startTime {
-//                if let stop = stopTime {
-//                    let time = calcRestartTime(start: start, stop: stop)
-//                    let diff = Date().timeIntervalSince(time)
-//                    setTimeLabel(Int(diff))
-//                }
-//            }
-//        }
-//    }
-//
-//    func startTimer(){
-//        timer = Timer.scheduledTimer(timeInterval: 0.5, target: self, selector: #selector(refreshValue), userInfo: nil, repeats: true)
-//        setIsCounting(true)
-//    }
-//
-//    func stopTimer(){
-//        if timer != nil {
-//            timer?.invalidate()
-//        }
-//        setIsCounting(false)
-//    }
-//
-//    func calcRestartTime(start: Date, stop: Date) -> Date {
-//        let diff = start.timeIntervalSince(stop)
-//        return Date().addingTimeInterval(diff)
-//    }
-//
-//    @objc func resetTimer() {
-//        setStopTime(date: nil)
-//        setStartTime(date: nil)
-//        stopTimer()
-//        minutesOnClock = 25
-//        secondsOnClock = 00
-//        // Добавьте код для обновления вашего интерфейса здесь
-//    }
-//
-//    @objc func playPause() {
-//        if isCounting {
-//            setStopTime(date: Date())
-//            stopTimer()
-//        } else {
-//            if let stop = stopTime {
-//                let restartTime = calcRestartTime(start: startTime!, stop: stop)
-//                setStopTime(date: nil)
-//                setStartTime(date: restartTime)
-//            }  else {
-//                setStartTime(date: Date())
-//            }
-//            startTimer()
-//        }
-//    }
-//
-//    func setTimeLabel(_ val: Int) {
-//        secondsLeft = totalTimeInSecondsIs - val
-//        minutesOnClock = secondsLeft! / 60
-//        secondsOnClock = secondsLeft! % 60
-//        // Добавьте код для обновления вашего интерфейса здесь
-//    }
-//
-//    //MARK: – @objc funcs
-//    @objc func refreshValue() {
-//        if let start = startTime {
-//            let diff = Date().timeIntervalSince(start)
-//            setTimeLabel(Int(diff))
-//        } else {
-//            stopTimer()
-//            setTimeLabel(0)
-//        }
-//    }
-//
-//    @objc func nextSection() {
-//        stopTimer()
-//        // Добавьте код для перехода к следующему разделу здесь
-//    }
+
+
+    init(totalTimeInSeconds: Int, minutesOnClock: Int, secondsOnClock: Int, secondsLeft: Int, currentTimerName: String) {
+        self.totalTimeInSecondsIs = totalTimeInSeconds
+        self.minutesOnClock = minutesOnClock
+        self.secondsOnClock = secondsOnClock
+        self.secondsLeft = secondsLeft
+        self.currentTimerName = currentTimerName
+        super.init(nibName: nil, bundle: nil)
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        
+        if isCounting {
+            startTimer()
+        } else {
+            stopTimer()
+            if let start = startTime {
+                if let stop = stopTime {
+                    let time = calcRestartTime(start: start, stop: stop)
+                    let diff = Date().timeIntervalSince(time)
+                    setTimeLabel(Int(diff))
+                }
+            }
+        }
+    }
+
+    func startTimer(){
+        timer = Timer.scheduledTimer(timeInterval: 0.5, target: self, selector: #selector(refreshValue), userInfo: nil, repeats: true)
+            setIsCounting(true, timer: currentTimerName)
+    }
+    
+    func stopTimer() {
+        if let timer = timer {
+            timer.invalidate()
+        }
+        setIsCounting(false, timer: currentTimerName)
+    }
+    
+    func calcRestartTime(start: Date, stop: Date) -> Date {
+        let diff = start.timeIntervalSince(stop)
+        return Date().addingTimeInterval(diff)
+    }
+
+    @objc func resetTimer() {
+        setStopTime(date: nil, timer: currentTimerName)
+        setStartTime(date: nil, timer: currentTimerName)
+        stopTimer()
+        minutesOnClock = 25
+        secondsOnClock = 00
+    }
+
+    @objc func playPause() {
+        if isCounting {
+            setStopTime(date: Date(), timer: currentTimerName)
+            stopTimer()
+        } else {
+            if let stop = stopTime {
+                let restartTime = calcRestartTime(start: startTime!, stop: stop)
+                setStopTime(date: nil, timer: currentTimerName)
+                setStartTime(date: restartTime, timer: currentTimerName)
+            }  else {
+                setStartTime(date: Date(), timer: currentTimerName)
+            }
+            startTimer()
+        }
+    }
+
+    func setTimeLabel(_ val: Int) {
+        secondsLeft = totalTimeInSecondsIs - val
+        minutesOnClock = secondsLeft! / 60
+        secondsOnClock = secondsLeft! % 60
+    }
+    
+    //MARK: – @objc funcs
+    @objc func refreshValue() {
+        if let start = startTime {
+            let diff = Date().timeIntervalSince(start)
+            setTimeLabel(Int(diff))
+        } else {
+            stopTimer()
+            setTimeLabel(0)
+        }
+    }
+
+    @objc func nextSection() {
+        stopTimer()
+        // код для перехода к следующему разделу здесь
+    }
     
     //MARK: – set user defaults Keys
     func setStartTime(date: Date?, timer: String){

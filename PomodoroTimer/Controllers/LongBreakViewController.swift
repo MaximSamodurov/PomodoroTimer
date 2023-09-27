@@ -10,104 +10,66 @@ import UIKit
 class LongBreakViewController: TimerController {
     
     let longBreakView = LongBreakView(frame: CGRect.zero)
-
-//    var timer = Timer()
     let aDecoder = NSCoder()
     
-//    init() {
-//        super.init(totalTimeInSeconds: 20 * 60, minutesOnClock: 20, secondsOnClock: 00, secondsLeft: 0)
-//    }
-//    
-//    required init?(coder aDecoder: NSCoder) {
-//        super.init(coder: aDecoder)
-//    }
-//    
-//    override func viewDidLoad() {
-//        super.viewDidLoad()
-//        view.addSubview(longBreakView)
-//        longBreakView.fillSuperview()
-//        longBreakView.pausePlayButton.addTarget(self, action: #selector(playPause), for: .touchUpInside)
-//        longBreakView.nextSectionButton.addTarget(self, action: #selector(nextSection), for: .touchUpInside)
-//        
-//        longBreakView.timeMinutesCounter.text = String(format: "%02d", minutesOnClock)
-//        longBreakView.timeSecondsCounter.text = String(format: "%02d", secondsOnClock)
-//    }
-//    
-////    func startTimer(){
-////        timer = Timer.scheduledTimer(timeInterval: 0.5, target: self, selector: #selector(refreshValue), userInfo: nil, repeats: true)
-////        longBreakView.pausePlayButton.setImage(UIImage(systemName: "pause.fill", withConfiguration: config), for: .normal)
-////        setIsCounting(true, timer: "longBreak")
-////    }
-////
-//////    func stopTimer(){
-//////        longBreakView.pausePlayButton.setImage(UIImage(systemName: "play.fill", withConfiguration: config), for: .normal)
-//////        if let breakTimer = timer {
-//////            breakTimer.invalidate()
-//////        }
-//////        setIsCounting(false, timer: "longBreak")
-//////    }
-////
-////    func calcRestartTime(start: Date, stop: Date) -> Date {
-////        let diff = start.timeIntervalSince(stop)
-////        return Date().addingTimeInterval(diff)
-////    }
-////
-////    @objc func resetTimer() {
-////
-////        setStopTime(date: nil, timer: "longBreak")
-////        setStartTime(date: nil, timer: "longBreak")
-////        stopTimer(name: "LongBreak")
-////        minutesOnClock = 20
-////        secondsOnClock = 00
-////        longBreakView.timeMinutesCounter.text = String(format: "%02d", minutesOnClock)
-////        longBreakView.timeSecondsCounter.text = String(format: "%02d", secondsOnClock)
-////    }
-////
-////    @objc func playPause() {
-////        if isCounting {
-////            setStopTime(date: Date(), timer: "longBreak")
-////            stopTimer()
-////        } else {
-////            if let stop = stopTime {
-////                let restartTime = calcRestartTime(start: startTime!, stop: stop)
-////                setStopTime(date: nil, timer: "longBreak")
-////                setStartTime(date: restartTime, timer: "longBreak")
-////            }  else {
-////                setStartTime(date: Date(), timer: "longBreak")
-////            }
-////            startTimer()
-////        }
-////    }
-////
-////    func setTimeLabel(_ val: Int) {
-////
-////        secondsLeft = totalTimeInSecondsIs - val
-////        minutesOnClock = secondsLeft! / 60
-////        secondsOnClock = secondsLeft! % 60
-////
-////        longBreakView.timeMinutesCounter.text = String(format: "%02d", minutesOnClock)
-////        longBreakView.timeSecondsCounter.text = String(format: "%02d", secondsOnClock)
-////
-////        if secondsLeft == 0 {
-////            nextSection()
-////        }
-////    }
-////
-////    //MARK: – @objc funcs
-////    @objc func refreshValue() {
-////        if let start = startTime {
-////            let diff = Date().timeIntervalSince(start)
-////            setTimeLabel(Int(diff))
-////        } else {
-////            stopTimer()
-////            setTimeLabel(0)
-////        }
-////    }
-////
-//    @objc func nextSection() {
-////        stopTimer()
-//        // Перейти к корневому UIViewController (находящемуся в UINavigationController).
-//        dismiss(animated: true)
-//    }
+    init() {
+        super.init(totalTimeInSeconds: 20 * 60, minutesOnClock: 20, secondsOnClock: 00, secondsLeft: 0, currentTimerName: "longBreak")
+    }
+
+    required init?(coder aDecoder: NSCoder) {
+        super.init(coder: aDecoder)
+    }
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        
+        view.addSubview(longBreakView)
+        longBreakView.fillSuperview()
+        
+        longBreakView.pausePlayButton.addTarget(self, action: #selector(playPause), for: .touchUpInside)
+        longBreakView.nextSectionButton.addTarget(self, action: #selector(nextSection), for: .touchUpInside)
+        
+        longBreakView.timeMinutesCounter.text = String(format: "%02d", minutesOnClock)
+        longBreakView.timeSecondsCounter.text = String(format: "%02d", secondsOnClock)
+        
+        startTime = userDefaults.object(forKey: K.longBreakStartTimeKey) as? Date
+        stopTime = userDefaults.object(forKey: K.longBreakStopTimeKey) as? Date
+        isCounting = userDefaults.bool(forKey: K.longBreakCountingKey)
+    }
+    
+    override func startTimer(){
+        super.startTimer()
+        longBreakView.pausePlayButton.setImage(UIImage(systemName: "pause.fill", withConfiguration: config), for: .normal)
+    }
+
+    override func stopTimer() {
+        super.stopTimer()
+        longBreakView.pausePlayButton.setImage(UIImage(systemName: "play.fill", withConfiguration: config), for: .normal)
+    }
+
+    @objc override func resetTimer() {
+        super.resetTimer()
+        
+        longBreakView.timeMinutesCounter.text = String(format: "%02d", minutesOnClock)
+        longBreakView.timeSecondsCounter.text = String(format: "%02d", secondsOnClock)
+    }
+
+    override func setTimeLabel(_ val: Int) {
+        super.setTimeLabel(val)
+
+        longBreakView.timeMinutesCounter.text = String(format: "%02d", minutesOnClock)
+        longBreakView.timeSecondsCounter.text = String(format: "%02d", secondsOnClock)
+
+        if secondsLeft == 0 {
+            nextSection()
+        }
+    }
+    
+    @objc override func nextSection() {
+        super.nextSection()
+        stopTimer()
+        // Перейти к корневому UIViewController (находящемуся в UINavigationController).
+        dismiss(animated: true)
+    }
 }
 

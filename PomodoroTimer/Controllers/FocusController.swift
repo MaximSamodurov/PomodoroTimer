@@ -74,26 +74,22 @@ class FocusController: TimerController {
         focusTimeCount += 1
         
         if focusTimeCount >= 4 { //if our goal is 4 Focus Times
-//            let longBreakVC = LongBreakViewController()
-//            self.present(longBreakVC, animated: true)
-//            longBreakVC.resetTimer()
-//            longBreakVC.playPause()
+            let longBreakVC = LongBreakViewController()
+            self.present(longBreakVC, animated: true)
+            longBreakVC.resetTimer()
+            longBreakVC.playPause()
             focusTimeCount = 0
         } else {
-//            let shortBreakVC = ShortBreakController()
-//            shortBreakVC.shortBreakCompletion = {
-                // код, который должен быть запущен после завершения ShortBreak
-//                self.playPause()
-//            }
-//            // Показываем ShortBreakTimeViewController
-//            self.present(shortBreakVC, animated: true, completion: nil)
-//            shortBreakVC.resetTimer()
-//            shortBreakVC.playPause()
-        }
-    }
-    
-    
-    @objc func openPopupMenu() {
-        print("openPopupMenu")
+             let shortBreakVC = ShortBreakController()
+                shortBreakVC.shortBreakCompletion = {
+                    //                 код, который должен быть запущен после завершения ShortBreak
+                    self.playPause()
+                }
+                // Показываем ShortBreakTimeViewController
+                self.present(shortBreakVC, animated: true, completion: nil)
+                shortBreakVC.resetTimer()
+                shortBreakVC.playPause()
+            }
+        
     }
 }
