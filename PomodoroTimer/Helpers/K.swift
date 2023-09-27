@@ -20,4 +20,6 @@ struct K { //constants
     static let longBreakStopTimeKey = "longBreakStopTime"
     static let longBreakCountingKey = "longBreakCountingKey"
     
+    static let playButtonName = "play.fill"
+    static let pauseButtonName = "pause.fill"
 }
