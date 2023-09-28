@@ -32,10 +32,6 @@ class LongBreakController: TimerController {
         
         longBreakView.timeMinutesCounter.text = String(format: "%02d", minutesOnClock)
         longBreakView.timeSecondsCounter.text = String(format: "%02d", secondsOnClock)
-        
-        startTime = userDefaults.object(forKey: K.longBreakStartTimeKey) as? Date
-        stopTime = userDefaults.object(forKey: K.longBreakStopTimeKey) as? Date
-        isCounting = userDefaults.bool(forKey: K.longBreakCountingKey)
     }
     
     override func startTimer(){

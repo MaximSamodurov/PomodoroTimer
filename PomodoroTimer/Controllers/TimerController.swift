@@ -40,6 +40,7 @@ class TimerController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        determineStartStopAndIsCounting(timer: currentTimerName)
         
         if isCounting {
             startTimer()
@@ -119,6 +120,28 @@ class TimerController: UIViewController {
     }
     
     //MARK: – set user defaults Keys
+    func determineStartStopAndIsCounting(timer: String){
+        switch timer {
+        case "focus":
+            startTime = userDefaults.object(forKey: K.focusStartTimeKey) as? Date
+            stopTime = userDefaults.object(forKey: K.focusStopTimeKey) as? Date
+            isCounting = userDefaults.bool(forKey: K.focusCountingKey)
+//            print("focus", startTime)
+        case "shortBreak":
+            startTime = userDefaults.object(forKey: K.shortBreakStartTimeKey) as? Date
+            stopTime = userDefaults.object(forKey: K.shortBreakStopTimeKey) as? Date
+            isCounting = userDefaults.bool(forKey: K.shortBreakCountingKey)
+//            print("shortBreak", startTime)
+        case "longBreak":
+            startTime = userDefaults.object(forKey: K.longBreakStartTimeKey) as? Date
+            stopTime = userDefaults.object(forKey: K.longBreakStopTimeKey) as? Date
+            isCounting = userDefaults.bool(forKey: K.longBreakCountingKey)
+//            print("longBreak", startTime)
+        default:
+            return
+        }
+    }
+    
     func setStartTime(date: Date?, timer: String){
         startTime = date
         switch timer {
