@@ -13,7 +13,7 @@ class FocusController: TimerController {
     let aDecoder = NSCoder()
 
     init() {
-        super.init(totalTimeInSeconds: 25 * 60, minutesOnClock: 25, secondsOnClock: 00, secondsLeft: 0, currentTimerName: "focus")
+        super.init(totalTimeInSecondsIs: 25 * 60, minutesOnClock: 25, secondsOnClock: 00, secondsLeft: 0, currentTimerName: "focus")
     }
     
     required init?(coder aDecoder: NSCoder) {
@@ -74,7 +74,7 @@ class FocusController: TimerController {
         focusTimeCount += 1
         
         if focusTimeCount >= 4 { //if our goal is 4 Focus Times
-            let longBreakVC = LongBreakViewController()
+            let longBreakVC = LongBreakController()
             self.present(longBreakVC, animated: true)
             longBreakVC.resetTimer()
             longBreakVC.playPause()

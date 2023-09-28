@@ -25,8 +25,8 @@ class TimerController: UIViewController {
     let config = UIImage.SymbolConfiguration(pointSize: 23)
 
 
-    init(totalTimeInSeconds: Int, minutesOnClock: Int, secondsOnClock: Int, secondsLeft: Int, currentTimerName: String) {
-        self.totalTimeInSecondsIs = totalTimeInSeconds
+    init(totalTimeInSecondsIs: Int, minutesOnClock: Int, secondsOnClock: Int, secondsLeft: Int, currentTimerName: String) {
+        self.totalTimeInSecondsIs = totalTimeInSecondsIs
         self.minutesOnClock = minutesOnClock
         self.secondsOnClock = secondsOnClock
         self.secondsLeft = secondsLeft
@@ -76,7 +76,7 @@ class TimerController: UIViewController {
         setStopTime(date: nil, timer: currentTimerName)
         setStartTime(date: nil, timer: currentTimerName)
         stopTimer()
-        minutesOnClock = 25
+        minutesOnClock = totalTimeInSecondsIs / 60
         secondsOnClock = 00
     }
 

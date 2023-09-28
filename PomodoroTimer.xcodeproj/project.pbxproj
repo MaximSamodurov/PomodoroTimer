@@ -21,7 +21,7 @@
 		B23BCE6C29BB291E0076821E /* BaseTabController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B23BCE6B29BB291E0076821E /* BaseTabController.swift */; };
 		B23BCE6E29BB2B520076821E /* SettingsController .swift in Sources */ = {isa = PBXBuildFile; fileRef = B23BCE6D29BB2B520076821E /* SettingsController .swift */; };
 		B23BCE7029BB2C130076821E /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B23BCE6F29BB2C130076821E /* SettingsView.swift */; };
-		B28D4B7329B9F7A000B084B5 /* LongBreakViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B28D4B7229B9F7A000B084B5 /* LongBreakViewController.swift */; };
+		B28D4B7329B9F7A000B084B5 /* LongBreakController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B28D4B7229B9F7A000B084B5 /* LongBreakController.swift */; };
 		B28D4B7529B9F7FC00B084B5 /* LongBreakView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B28D4B7429B9F7FC00B084B5 /* LongBreakView.swift */; };
 		B293498A29B3A24A0076C166 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B293498929B3A24A0076C166 /* Main.storyboard */; };
 		B2C0C5E929B5D1300016BC7E /* Roboto-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = B2C0C5E829B5D1300016BC7E /* Roboto-Bold.ttf */; };
@@ -49,7 +49,7 @@
 		B23BCE6B29BB291E0076821E /* BaseTabController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseTabController.swift; sourceTree = "<group>"; };
 		B23BCE6D29BB2B520076821E /* SettingsController .swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "SettingsController .swift"; sourceTree = "<group>"; };
 		B23BCE6F29BB2C130076821E /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
-		B28D4B7229B9F7A000B084B5 /* LongBreakViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LongBreakViewController.swift; sourceTree = "<group>"; };
+		B28D4B7229B9F7A000B084B5 /* LongBreakController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LongBreakController.swift; sourceTree = "<group>"; };
 		B28D4B7429B9F7FC00B084B5 /* LongBreakView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LongBreakView.swift; sourceTree = "<group>"; };
 		B293498929B3A24A0076C166 /* Main.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Main.storyboard; sourceTree = "<group>"; };
 		B2C0C5E829B5D1300016BC7E /* Roboto-Bold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Roboto-Bold.ttf"; sourceTree = "<group>"; };
@@ -110,7 +110,7 @@
 				CEDA860F2AB2150100CFBB1B /* TimerController.swift */,
 				B227898629B1D5FE009C9BE4 /* FocusController.swift */,
 				B212B45729B9F2400018990C /* ShortBreakController.swift */,
-				B28D4B7229B9F7A000B084B5 /* LongBreakViewController.swift */,
+				B28D4B7229B9F7A000B084B5 /* LongBreakController.swift */,
 				B23BCE6D29BB2B520076821E /* SettingsController .swift */,
 				B23BCE6B29BB291E0076821E /* BaseTabController.swift */,
 			);
@@ -236,7 +236,7 @@
 				B227898729B1D5FE009C9BE4 /* FocusController.swift in Sources */,
 				B22789A329B1E9C3009C9BE4 /* Extensions.swift in Sources */,
 				B28D4B7529B9F7FC00B084B5 /* LongBreakView.swift in Sources */,
-				B28D4B7329B9F7A000B084B5 /* LongBreakViewController.swift in Sources */,
+				B28D4B7329B9F7A000B084B5 /* LongBreakController.swift in Sources */,
 				B23BCE6C29BB291E0076821E /* BaseTabController.swift in Sources */,
 				B227898329B1D5FE009C9BE4 /* AppDelegate.swift in Sources */,
 				B23BCE7029BB2C130076821E /* SettingsView.swift in Sources */,

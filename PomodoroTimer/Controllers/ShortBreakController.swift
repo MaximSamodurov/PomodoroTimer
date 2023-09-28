@@ -15,7 +15,7 @@ class ShortBreakController: TimerController {
     let aDecoder = NSCoder()
     
     init() {
-        super.init(totalTimeInSeconds: 5 * 60, minutesOnClock: 5, secondsOnClock: 00, secondsLeft: 0, currentTimerName: "shortBreak")
+        super.init(totalTimeInSecondsIs: 5 * 60, minutesOnClock: 5, secondsOnClock: 00, secondsLeft: 0, currentTimerName: "shortBreak")
     }
     
     required init?(coder aDecoder: NSCoder) {
