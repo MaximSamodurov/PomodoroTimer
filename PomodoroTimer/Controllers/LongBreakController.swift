@@ -7,13 +7,13 @@
 
 import UIKit
 
-class LongBreakViewController: TimerController {
+class LongBreakController: TimerController {
     
     let longBreakView = LongBreakView(frame: CGRect.zero)
     let aDecoder = NSCoder()
     
     init() {
-        super.init(totalTimeInSeconds: 20 * 60, minutesOnClock: 20, secondsOnClock: 00, secondsLeft: 0, currentTimerName: "longBreak")
+        super.init(totalTimeInSecondsIs: 20 * 60, minutesOnClock: 20, secondsOnClock: 00, secondsLeft: 0, currentTimerName: "longBreak")
     }
 
     required init?(coder aDecoder: NSCoder) {
@@ -28,6 +28,7 @@ class LongBreakViewController: TimerController {
         
         longBreakView.pausePlayButton.addTarget(self, action: #selector(playPause), for: .touchUpInside)
         longBreakView.nextSectionButton.addTarget(self, action: #selector(nextSection), for: .touchUpInside)
+        longBreakView.threeDotsButton.addTarget(self, action: #selector(resetTimer), for: .touchUpInside)
         
         longBreakView.timeMinutesCounter.text = String(format: "%02d", minutesOnClock)
         longBreakView.timeSecondsCounter.text = String(format: "%02d", secondsOnClock)
