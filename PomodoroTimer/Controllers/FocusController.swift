@@ -13,7 +13,7 @@ class FocusController: TimerController {
     let aDecoder = NSCoder()
 
     init() {
-        super.init(totalTimeInSecondsIs: 25 * 60, minutesOnClock: 25, secondsOnClock: 00, secondsLeft: 0, currentTimerName: "focus")
+        super.init(totalTimeInSecondsIs: 25 * 60, minutesOnClock: 25, currentTimerName: "focus")
     }
     
     required init?(coder aDecoder: NSCoder) {

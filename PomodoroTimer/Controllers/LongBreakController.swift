@@ -13,7 +13,7 @@ class LongBreakController: TimerController {
     let aDecoder = NSCoder()
     
     init() {
-        super.init(totalTimeInSecondsIs: 20 * 60, minutesOnClock: 20, secondsOnClock: 00, secondsLeft: 0, currentTimerName: "longBreak")
+        super.init(totalTimeInSecondsIs: 20 * 60, minutesOnClock: 20, currentTimerName: "longBreak")
     }
 
     required init?(coder aDecoder: NSCoder) {
