@@ -35,10 +35,6 @@ class ShortBreakController: TimerController {
         
         shortBreakView.timeMinutesCounter.text = String(format: "%02d", minutesOnClock)
         shortBreakView.timeSecondsCounter.text = String(format: "%02d", secondsOnClock)
-        
-        startTime = userDefaults.object(forKey: K.shortBreakStartTimeKey) as? Date
-        stopTime = userDefaults.object(forKey: K.shortBreakStopTimeKey) as? Date
-        isCounting = userDefaults.bool(forKey: K.shortBreakCountingKey)
     }
     
     override func startTimer(){

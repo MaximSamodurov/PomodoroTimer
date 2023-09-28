@@ -34,10 +34,6 @@ class FocusController: TimerController {
         
         focusView.timeMinutesCounter.text = String(format: "%02d", minutesOnClock)
         focusView.timeSecondsCounter.text = String(format: "%02d", secondsOnClock)
-        
-        startTime = userDefaults.object(forKey: K.focusStartTimeKey) as? Date
-        stopTime = userDefaults.object(forKey: K.focusStopTimeKey) as? Date
-        isCounting = userDefaults.bool(forKey: K.focusCountingKey)
     }
     
     override func startTimer(){
