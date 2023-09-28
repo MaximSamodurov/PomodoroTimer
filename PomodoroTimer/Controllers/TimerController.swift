@@ -12,8 +12,8 @@ class TimerController: UIViewController {
     
     var totalTimeInSecondsIs: Int
     var minutesOnClock: Int
-    var secondsOnClock: Int
-    var secondsLeft: Int?
+    var secondsOnClock: Int = 00
+    var secondsLeft: Int? = 0
     
     var currentTimerName: String
     
@@ -25,11 +25,9 @@ class TimerController: UIViewController {
     let config = UIImage.SymbolConfiguration(pointSize: 23)
 
 
-    init(totalTimeInSecondsIs: Int, minutesOnClock: Int, secondsOnClock: Int, secondsLeft: Int, currentTimerName: String) {
+    init(totalTimeInSecondsIs: Int, minutesOnClock: Int, currentTimerName: String) {
         self.totalTimeInSecondsIs = totalTimeInSecondsIs
         self.minutesOnClock = minutesOnClock
-        self.secondsOnClock = secondsOnClock
-        self.secondsLeft = secondsLeft
         self.currentTimerName = currentTimerName
         super.init(nibName: nil, bundle: nil)
     }
