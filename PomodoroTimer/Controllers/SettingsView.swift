@@ -51,28 +51,27 @@ class SettingsView: UIView {
         focusTimeMinutesStack.addArrangedSubview(focusTimeTextField)
         addSubview(focusTimeMinutesStack)
         
-        focusTimeMinutesStack.distribution = .fill
-        focusTimeMinutesStack.leadingAnchor.constraint(equalTo: leadingAnchor).isActive = true
-        focusTimeMinutesStack.trailingAnchor.constraint(equalTo: trailingAnchor).isActive = true
-        
         
         
         let focusTimePomodorosStack = createStackView() // + stepper
-        focusTimePomodorosLabel = createLabel("Pomodoros, \(amountOfPomodoros)")
-        let focusTimePomodorosStepper = UIStepper()
+        focusTimePomodorosLabel = createLabel("Pomodoros")
+//        let focusTimePomodorosStepper = UIStepper()
+        let pomodorosNumberTextField = UITextField()
+        pomodorosNumberTextField.placeholder = "\(amountOfPomodoros)"
+        pomodorosNumberTextField.keyboardType = .numberPad
+        pomodorosNumberTextField.text = String(amountOfPomodoros)
+        pomodorosNumberTextField.font = .robotoFlex(size: 30)
         
         focusTimePomodorosStack.addArrangedSubview(focusTimePomodorosLabel)
-        focusTimePomodorosStack.addArrangedSubview(focusTimePomodorosStepper)
+        focusTimePomodorosStack.addArrangedSubview(pomodorosNumberTextField)
         addSubview(focusTimePomodorosStack)
         
-        focusTimePomodorosStack.distribution = .fill
-        focusTimePomodorosStack.leadingAnchor.constraint(equalTo: leadingAnchor).isActive = true
-        focusTimePomodorosStack.trailingAnchor.constraint(equalTo: trailingAnchor).isActive = true
+        focusTimePomodorosStack.distribution = .equalSpacing
         
         
         
         let shortBreakTimeMinutesStack = createStackView() // + value
-        shortBreakTimeMinutesLabel = createLabel("Short Break Duration   ")
+        shortBreakTimeMinutesLabel = createLabel("Short Break Duration")
         let shortBreakTextField = UITextField()
         shortBreakTextField.placeholder = "\(shortBreakDuration)"
         shortBreakTextField.keyboardType = .numberPad
@@ -83,9 +82,7 @@ class SettingsView: UIView {
         shortBreakTimeMinutesStack.addArrangedSubview(shortBreakTextField)
         addSubview(shortBreakTimeMinutesStack)
         
-        shortBreakTimeMinutesStack.distribution = .fill
-        shortBreakTimeMinutesStack.leadingAnchor.constraint(equalTo: leadingAnchor).isActive = true
-        shortBreakTimeMinutesStack.trailingAnchor.constraint(equalTo: trailingAnchor).isActive = true
+        shortBreakTimeMinutesStack.distribution = .equalSpacing
         
         
         
@@ -96,16 +93,13 @@ class SettingsView: UIView {
         
         enableLongBreakStack.addArrangedSubview(enableLongBreakLabel)
         enableLongBreakStack.addArrangedSubview(enableLongBreakSwitch)
+        enableLongBreakStack.distribution = .equalSpacing
         addSubview(enableLongBreakStack)
-        
-        enableLongBreakStack.distribution = .fill
-        enableLongBreakStack.leadingAnchor.constraint(equalTo: leadingAnchor).isActive = true
-        enableLongBreakStack.trailingAnchor.constraint(equalTo: trailingAnchor).isActive = true
         
         
         
         let longBreakTimeMinutesStack = createStackView() // + value
-        longBreakTimeMinutesLabel = createLabel("Long Break Duration   ")
+        longBreakTimeMinutesLabel = createLabel("Long Break Duration")
         let longBreakTextField = UITextField()
         longBreakTextField.placeholder = "\(longBreakDuration)"
         longBreakTextField.keyboardType = .numberPad
@@ -115,11 +109,7 @@ class SettingsView: UIView {
         longBreakTimeMinutesStack.addArrangedSubview(longBreakTimeMinutesLabel)
         longBreakTimeMinutesStack.addArrangedSubview(longBreakTextField)
         addSubview(longBreakTimeMinutesStack)
-        
-        longBreakTimeMinutesStack.distribution = .fill
-        longBreakTimeMinutesStack.alignment = .trailing
-        longBreakTimeMinutesStack.leadingAnchor.constraint(equalTo: leadingAnchor).isActive = true
-        longBreakTimeMinutesStack.trailingAnchor.constraint(equalTo: trailingAnchor).isActive = true
+        longBreakTimeMinutesStack.distribution = .equalSpacing
         
         
         
