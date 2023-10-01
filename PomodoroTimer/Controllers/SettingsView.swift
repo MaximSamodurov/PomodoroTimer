@@ -7,12 +7,11 @@
 
 import UIKit
 
-class SettingsView: UITableViewCell {
+class SettingsView: UIView {
     
-    override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
-        super.init(style: style, reuseIdentifier: reuseIdentifier)
-        
-        backgroundColor = .blue
+    override init(frame: CGRect) {
+        super.init(frame: frame)
+        backgroundColor = .white
     }
     
     required init?(coder: NSCoder) {

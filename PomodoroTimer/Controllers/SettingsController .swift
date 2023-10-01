@@ -7,26 +7,15 @@
 
 import UIKit
 
-class SettingsController: UITableViewController {
+class SettingsController: UIViewController {
     
-    let cellID = "cellID"
+    let settingsView = SettingsView(frame: CGRect.zero)
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        tableView.register(SettingsView.self, forCellReuseIdentifier: cellID)
-        self.tableView.reloadData()
+        view.addSubview(settingsView)
+        settingsView.fillSuperview()
     }
-    
-    override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 5
-    }
-    
-    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: cellID, for: indexPath) as! SettingsView
-        cell.textLabel?.text = "Here is settings"
-        return cell
-    }
-    
     
 }
