@@ -50,7 +50,7 @@ class SettingsView: UIView {
         focusTimeMinutesStack.addArrangedSubview(focusTimeMinutesLabel)
         focusTimeMinutesStack.addArrangedSubview(focusTimeTextField)
         addSubview(focusTimeMinutesStack)
-        
+        focusTimeTextField.addDoneButtonOnKeyboard()
         
         
         let focusTimePomodorosStack = createStackView() // + stepper
@@ -67,7 +67,7 @@ class SettingsView: UIView {
         addSubview(focusTimePomodorosStack)
         
         focusTimePomodorosStack.distribution = .equalSpacing
-        
+        pomodorosNumberTextField.addDoneButtonOnKeyboard()
         
         
         let shortBreakTimeMinutesStack = createStackView() // + value
@@ -81,7 +81,7 @@ class SettingsView: UIView {
         shortBreakTimeMinutesStack.addArrangedSubview(shortBreakTimeMinutesLabel)
         shortBreakTimeMinutesStack.addArrangedSubview(shortBreakTextField)
         addSubview(shortBreakTimeMinutesStack)
-        
+        shortBreakTextField.addDoneButtonOnKeyboard()
         shortBreakTimeMinutesStack.distribution = .equalSpacing
         
         
@@ -110,7 +110,7 @@ class SettingsView: UIView {
         longBreakTimeMinutesStack.addArrangedSubview(longBreakTextField)
         addSubview(longBreakTimeMinutesStack)
         longBreakTimeMinutesStack.distribution = .equalSpacing
-        
+        longBreakTextField.addDoneButtonOnKeyboard()
         
         
         // main viewStack is below:
