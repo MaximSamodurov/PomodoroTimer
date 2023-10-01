@@ -103,3 +103,36 @@ extension UIView {
 struct AnchoredConstraints {
     var top, leading, bottom, trailing, width, height: NSLayoutConstraint?
 }
+
+func createLabel(_ withText: String) -> UILabel {
+    let label = UILabel()
+    label.translatesAutoresizingMaskIntoConstraints = false
+    label.numberOfLines = 1
+    label.textColor = .black
+    label.textAlignment = .left
+//    label.backgroundColor = .white
+    label.text = withText
+//        label.adjustsFontSizeToFitWidth = true
+//        label.clipsToBounds = true
+    label.font = .robotoFlex(size: 30)
+//        label.layer.shadowColor = UIColor.black.cgColor
+//        label.layer.shadowRadius = 2
+//        label.layer.shadowOpacity = 0.3
+//        label.layer.shadowOffset = CGSize(width: 3, height: 3)
+//        label.textColor = UIColor(#colorLiteral(red: 0.3531352282, green: 0.1171852872, blue: 0.1062337533, alpha: 1))
+//        label.attributedText = NSAttributedString(string: label.text!, attributes: [.kern: 1.1])
+    
+    return label
+}
+
+func createStackView() -> UIStackView {
+    let stackView = UIStackView()
+    stackView.axis = .horizontal
+    stackView.translatesAutoresizingMaskIntoConstraints = false
+//    stackView.alignment = .fill
+//    stackView.distribution = .fill
+    stackView.spacing = 8
+//    stackView.directionalLayoutMargins = NSDirectionalEdgeInsets(top: 0, leading: 8, bottom: 0, trailing: 8)
+    
+    return stackView
+}
