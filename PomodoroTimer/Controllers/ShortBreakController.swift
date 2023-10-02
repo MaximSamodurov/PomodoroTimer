@@ -29,6 +29,8 @@ class ShortBreakController: TimerController {
         view.addSubview(shortBreakView)
         shortBreakView.fillSuperview()
         
+//        NotificationCenter.default.addObserver(self, selector: #selector(shortBreakDurationChanged(_:)), name: Notification.Name("shortBreakDuration"), object: nil)
+    
         shortBreakView.pausePlayButton.addTarget(self, action: #selector(playPause), for: .touchUpInside)
         shortBreakView.nextSectionButton.addTarget(self, action: #selector(nextSection), for: .touchUpInside)
         shortBreakView.threeDotsButton.addTarget(self, action: #selector(resetTimer), for: .touchUpInside)
@@ -72,4 +74,13 @@ class ShortBreakController: TimerController {
             self?.shortBreakCompletion?()
         }
     }
+    
+//    @objc func shortBreakDurationChanged(_ notification: Notification) {
+//        if let duration = notification.userInfo?["shortBreakDuration"] as? String {
+//            if let durationInt = Int(duration) {
+//                totalTimeInSecondsIs = durationInt * 60
+//                minutesOnClock = durationInt
+//            }
+//        }
+//    }
 }

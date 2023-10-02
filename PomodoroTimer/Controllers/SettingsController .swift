@@ -35,6 +35,9 @@ class SettingsController: UIViewController {
         settingsView.fillSuperview()
         
         settingsView.longBreakSwitch.addTarget(self, action: #selector(self.switchValueChanged(_:)), for: .valueChanged)
+        settingsView.focusTimeTextField.addTarget(self, action: #selector(textFieldDidChange(_:)), for: .editingChanged)
+        settingsView.shortBreakTextField.addTarget(self, action: #selector(textFieldDidChange(_:)), for: .editingChanged)
+        settingsView.longBreakTextField.addTarget(self, action: #selector(textFieldDidChange(_:)), for: .editingChanged)
     }
     
     @objc func switchValueChanged(_ sender: UISwitch) {
@@ -44,4 +47,25 @@ class SettingsController: UIViewController {
         UserDefaults.standard.set(sender.isOn, forKey: K.isSwitchOnKey)
 //        print("userDefaults SwitchIsOn",UserDefaults.standard.bool(forKey: K.isSwitchOnKey))
       }
+    
+    @objc func textFieldDidChange(_ textField: UITextField) {
+        // код для обработки изменений в тексте
+        
+        switch textField {
+        case settingsView.focusTimeTextField:
+            if let updatedText = textField.text {
+                NotificationCenter.default.post(name: Notification.Name("FocusDurationChanged"), object: nil, userInfo: ["focusDuration": updatedText])
+            }
+        case settingsView.shortBreakTextField:
+            if let updatedText = textField.text {
+                NotificationCenter.default.post(name: Notification.Name("ShortBreakDurationChanged"), object: nil, userInfo: ["shortBreakDuration": updatedText])
+            }
+        case settingsView.longBreakTextField:
+            if let updatedText = textField.text {
+                NotificationCenter.default.post(name: Notification.Name("LongBreakDurationChanged"), object: nil, userInfo: ["longBreakDuration": updatedText])
+            }
+            
+        default: print ("well well well, something isn't right")
+        }
+    }
 }

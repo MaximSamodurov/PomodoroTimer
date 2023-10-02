@@ -23,6 +23,10 @@ class SettingsView: UIView {
     
     var settingsLabel, focusTimeMinutesLabel, focusTimePomodorosLabel, shortBreakTimeMinutesLabel, enableLongBreakLabel, longBreakTimeMinutesLabel: UILabel!
     let longBreakSwitch = UISwitch()
+    let focusTimeTextField = UITextField()
+    let shortBreakTextField = UITextField()
+    let longBreakTextField = UITextField()
+    let pomodorosNumberTextField = UITextField()
     
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -43,7 +47,7 @@ class SettingsView: UIView {
         
         let focusTimeMinutesStack = createStackView() // + value
         focusTimeMinutesLabel = createLabel("Focus duration")
-        let focusTimeTextField = UITextField()
+
         focusTimeTextField.placeholder = "\(focusDuration)"
         focusTimeTextField.keyboardType = .numberPad
         focusTimeTextField.text = String(focusDuration)
@@ -57,8 +61,6 @@ class SettingsView: UIView {
         
         let focusTimePomodorosStack = createStackView() // + stepper
         focusTimePomodorosLabel = createLabel("Pomodoros")
-//        let focusTimePomodorosStepper = UIStepper()
-        let pomodorosNumberTextField = UITextField()
         pomodorosNumberTextField.placeholder = "\(amountOfPomodoros)"
         pomodorosNumberTextField.keyboardType = .numberPad
         pomodorosNumberTextField.text = String(amountOfPomodoros)
@@ -74,7 +76,6 @@ class SettingsView: UIView {
         
         let shortBreakTimeMinutesStack = createStackView() // + value
         shortBreakTimeMinutesLabel = createLabel("Short Break Duration")
-        let shortBreakTextField = UITextField()
         shortBreakTextField.placeholder = "\(shortBreakDuration)"
         shortBreakTextField.keyboardType = .numberPad
         shortBreakTextField.text = String(shortBreakDuration)
@@ -84,7 +85,7 @@ class SettingsView: UIView {
         shortBreakTimeMinutesStack.addArrangedSubview(shortBreakTextField)
         addSubview(shortBreakTimeMinutesStack)
         shortBreakTextField.addDoneButtonOnKeyboard()
-        shortBreakTimeMinutesStack.distribution = .equalSpacing
+//        shortBreakTimeMinutesStack.distribution = .equalSpacing
         
         
         
@@ -100,7 +101,6 @@ class SettingsView: UIView {
         
         let longBreakTimeMinutesStack = createStackView() // + value
         longBreakTimeMinutesLabel = createLabel("Long Break Duration")
-        let longBreakTextField = UITextField()
         longBreakTextField.placeholder = "\(longBreakDuration)"
         longBreakTextField.keyboardType = .numberPad
         longBreakTextField.text = String(longBreakDuration)

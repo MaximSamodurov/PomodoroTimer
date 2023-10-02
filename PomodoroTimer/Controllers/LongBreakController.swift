@@ -26,6 +26,8 @@ class LongBreakController: TimerController {
         view.addSubview(longBreakView)
         longBreakView.fillSuperview()
         
+//        NotificationCenter.default.addObserver(self, selector: #selector(longBreakDurationChanged(_:)), name: Notification.Name("longBreakDuration"), object: nil)
+        
         longBreakView.pausePlayButton.addTarget(self, action: #selector(playPause), for: .touchUpInside)
         longBreakView.nextSectionButton.addTarget(self, action: #selector(nextSection), for: .touchUpInside)
         longBreakView.threeDotsButton.addTarget(self, action: #selector(resetTimer), for: .touchUpInside)
@@ -65,8 +67,17 @@ class LongBreakController: TimerController {
     @objc override func nextSection() {
         super.nextSection()
         stopTimer()
-        // Перейти к корневому UIViewController (находящемуся в UINavigationController).
+        // Перейти к корневому UIViewController (который в UINavigationController).
         dismiss(animated: true)
     }
+    
+//    @objc func longBreakDurationChanged(_ notification: Notification) {
+//        if let duration = notification.userInfo?["longBreakDuration"] as? String {
+//            if let durationInt = Int(duration) {
+//                totalTimeInSecondsIs = durationInt * 60
+//                minutesOnClock = durationInt
+//            }
+//        }
+//    }
 }
 

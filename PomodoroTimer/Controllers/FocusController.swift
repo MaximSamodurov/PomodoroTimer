@@ -30,6 +30,7 @@ class FocusController: TimerController {
         focusView.fillSuperview()
 
         NotificationCenter.default.addObserver(self, selector: #selector(handleSwitchValueChanged(_:)), name: Notification.Name("SwitchValueChanged"), object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(focusTimeDurationChanged(_:)), name: Notification.Name("FocusDurationChanged"), object: nil)
         
         focusView.pausePlayButton.addTarget(self, action: #selector(playPause), for: .touchUpInside)
         focusView.nextSectionButton.addTarget(self, action: #selector(nextSection), for: .touchUpInside)
@@ -71,7 +72,7 @@ class FocusController: TimerController {
         super.nextSection()
         
         focusTimeCount += 1
-        print("current focusTimeCount is", focusTimeCount)
+//        print("current focusTimeCount is", focusTimeCount)
         if focusTimeCount >= 4 { //if our goal is 4 Focus Times
             if isSwitchOn {
                 let longBreakVC = LongBreakController()
@@ -107,6 +108,15 @@ class FocusController: TimerController {
             } else {
 //                print("is switch on? \(isSwitchOn)")
                 //  действия при выключенном UISwitch
+            }
+        }
+    }
+    
+    @objc func focusTimeDurationChanged(_ notification: Notification) {
+        if let duration = notification.userInfo?["focusDuration"] as? String {
+            if let durationInt = Int(duration) {
+                totalTimeInSecondsIs = durationInt * 60
+                minutesOnClock = durationInt
             }
         }
     }
