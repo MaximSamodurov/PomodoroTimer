@@ -10,6 +10,7 @@ import UIKit
 class FocusController: TimerController {
     
     let focusView = FocusView(frame: CGRect.zero)
+    var isSwitchOn = UserDefaults.standard.bool(forKey: K.isSwitchOnKey)
     let aDecoder = NSCoder()
 
     init() {
@@ -28,6 +29,8 @@ class FocusController: TimerController {
         view.addSubview(focusView)
         focusView.fillSuperview()
 
+        NotificationCenter.default.addObserver(self, selector: #selector(handleSwitchValueChanged(_:)), name: Notification.Name("SwitchValueChanged"), object: nil)
+        
         focusView.pausePlayButton.addTarget(self, action: #selector(playPause), for: .touchUpInside)
         focusView.nextSectionButton.addTarget(self, action: #selector(nextSection), for: .touchUpInside)
         focusView.threeDotsButton.addTarget(self, action: #selector(resetTimer), for: .touchUpInside)
@@ -68,13 +71,17 @@ class FocusController: TimerController {
         super.nextSection()
         
         focusTimeCount += 1
-        
+        print("current focusTimeCount is", focusTimeCount)
         if focusTimeCount >= 4 { //if our goal is 4 Focus Times
-            let longBreakVC = LongBreakController()
-            self.present(longBreakVC, animated: true)
-            longBreakVC.resetTimer()
-            longBreakVC.playPause()
-            focusTimeCount = 0
+            if isSwitchOn {
+                let longBreakVC = LongBreakController()
+                self.present(longBreakVC, animated: true)
+                longBreakVC.resetTimer()
+                longBreakVC.playPause()
+                focusTimeCount = 0
+            } else {
+                focusTimeCount = 0
+            }
         } else {
              let shortBreakVC = ShortBreakController()
                 shortBreakVC.shortBreakCompletion = {
@@ -87,5 +94,20 @@ class FocusController: TimerController {
                 shortBreakVC.playPause()
             }
         
+    }
+    
+    @objc func handleSwitchValueChanged(_ notification: Notification) {
+        if let isOn = notification.userInfo?["isOn"] as? Bool {
+            // нужно обновить значение isSwitchOn, а то иначе он будет использовать только, которое существовало при инициализации FocusController
+            isSwitchOn = isOn
+
+            if isOn {
+//                print("is switch on? \(isSwitchOn)")
+                //  действия при включенном UISwitch
+            } else {
+//                print("is switch on? \(isSwitchOn)")
+                //  действия при выключенном UISwitch
+            }
+        }
     }
 }

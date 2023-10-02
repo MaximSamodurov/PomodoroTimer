@@ -22,6 +22,7 @@ class SettingsView: UIView {
     var longBreakDuration = 20
     
     var settingsLabel, focusTimeMinutesLabel, focusTimePomodorosLabel, shortBreakTimeMinutesLabel, enableLongBreakLabel, longBreakTimeMinutesLabel: UILabel!
+    let longBreakSwitch = UISwitch()
     
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -31,6 +32,7 @@ class SettingsView: UIView {
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
+    
     func setupViews(){
         backgroundColor = .white
         
@@ -88,11 +90,9 @@ class SettingsView: UIView {
         
         let enableLongBreakStack = createStackView() // + toggle
         enableLongBreakLabel = createLabel("Enable Long Break")
-        let enableLongBreakSwitch = UISwitch()
-        enableLongBreakSwitch.isOn = true
         
         enableLongBreakStack.addArrangedSubview(enableLongBreakLabel)
-        enableLongBreakStack.addArrangedSubview(enableLongBreakSwitch)
+        enableLongBreakStack.addArrangedSubview(longBreakSwitch)
         enableLongBreakStack.distribution = .equalSpacing
         addSubview(enableLongBreakStack)
         

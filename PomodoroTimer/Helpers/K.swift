@@ -22,4 +22,5 @@ struct K { //constants
     
     static let playButtonName = "play.fill"
     static let pauseButtonName = "pause.fill"
+    static let isSwitchOnKey = "isSwitchOn"
 }
