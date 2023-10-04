@@ -10,10 +10,11 @@ import UIKit
 class LongBreakController: TimerController {
     
     let longBreakView = LongBreakView(frame: CGRect.zero)
+    var duration = UserDefaults.standard.integer(forKey: K.longBreakDurationKey)
     let aDecoder = NSCoder()
     
     init() {
-        super.init(totalTimeInSecondsIs: 20 * 60, minutesOnClock: 20, currentTimerName: "longBreak")
+        super.init(totalTimeInSecondsIs: duration * 60, minutesOnClock: duration, currentTimerName: "longBreak")
     }
 
     required init?(coder aDecoder: NSCoder) {
@@ -26,6 +27,8 @@ class LongBreakController: TimerController {
         view.addSubview(longBreakView)
         longBreakView.fillSuperview()
         
+        NotificationCenter.default.addObserver(self, selector: #selector(longBreakDurationChanged(_:)), name: Notification.Name("LongBreakDurationChanged"), object: nil)
+        
         longBreakView.pausePlayButton.addTarget(self, action: #selector(playPause), for: .touchUpInside)
         longBreakView.nextSectionButton.addTarget(self, action: #selector(nextSection), for: .touchUpInside)
         longBreakView.threeDotsButton.addTarget(self, action: #selector(resetTimer), for: .touchUpInside)
@@ -36,12 +39,12 @@ class LongBreakController: TimerController {
     
     override func startTimer(){
         super.startTimer()
-        longBreakView.pausePlayButton.setImage(UIImage(systemName: "pause.fill", withConfiguration: config), for: .normal)
+        longBreakView.pausePlayButton.setImage(UIImage(systemName: K.pauseButtonName, withConfiguration: config), for: .normal)
     }
 
     override func stopTimer() {
         super.stopTimer()
-        longBreakView.pausePlayButton.setImage(UIImage(systemName: "play.fill", withConfiguration: config), for: .normal)
+        longBreakView.pausePlayButton.setImage(UIImage(systemName: K.playButtonName, withConfiguration: config), for: .normal)
     }
 
     @objc override func resetTimer() {
@@ -65,8 +68,14 @@ class LongBreakController: TimerController {
     @objc override func nextSection() {
         super.nextSection()
         stopTimer()
-        // Перейти к корневому UIViewController (находящемуся в UINavigationController).
+        // Перейти к корневому UIViewController (который в UINavigationController).
         dismiss(animated: true)
+    }
+    
+    @objc func longBreakDurationChanged(_ notification: Notification) {
+        if let time = notification.userInfo?["shortBreakDuration"] as? Int {
+            duration = time
+        }
     }
 }
 
