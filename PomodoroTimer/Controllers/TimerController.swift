@@ -181,4 +181,17 @@ class TimerController: UIViewController {
             return
         }
     }
+//    not used yet, need to think how to use it better
+//    func setDurationTime(val: Int, timer: String){
+//        switch timer {
+//        case "focus":
+//            userDefaults.set(val, forKey: K.focusDurationKey)
+//        case "shortBreak":
+//            userDefaults.set(val, forKey: K.shortBreakDurationKey)
+//        case "longBreak":
+//            userDefaults.set(val, forKey: K.longBreakDurationKey)
+//        default:
+//            return
+//        }
+//    }
 }

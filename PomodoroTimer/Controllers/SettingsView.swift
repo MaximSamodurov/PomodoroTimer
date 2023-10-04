@@ -85,7 +85,7 @@ class SettingsView: UIView {
         shortBreakTimeMinutesStack.addArrangedSubview(shortBreakTextField)
         addSubview(shortBreakTimeMinutesStack)
         shortBreakTextField.addDoneButtonOnKeyboard()
-//        shortBreakTimeMinutesStack.distribution = .equalSpacing
+        shortBreakTimeMinutesStack.distribution = .equalSpacing
         
         
         

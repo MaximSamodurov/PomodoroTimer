@@ -11,10 +11,11 @@ class FocusController: TimerController {
     
     let focusView = FocusView(frame: CGRect.zero)
     var isSwitchOn = UserDefaults.standard.bool(forKey: K.isSwitchOnKey)
+    var duration = UserDefaults.standard.integer(forKey: K.focusDurationKey)
     let aDecoder = NSCoder()
 
     init() {
-        super.init(totalTimeInSecondsIs: 25 * 60, minutesOnClock: 25, currentTimerName: "focus")
+        super.init(totalTimeInSecondsIs: duration * 60, minutesOnClock: duration, currentTimerName: "focus")
     }
     
     required init?(coder aDecoder: NSCoder) {
@@ -28,7 +29,7 @@ class FocusController: TimerController {
         
         view.addSubview(focusView)
         focusView.fillSuperview()
-
+        print("duration in viewDidLoad is", duration)
         NotificationCenter.default.addObserver(self, selector: #selector(handleSwitchValueChanged(_:)), name: Notification.Name("SwitchValueChanged"), object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(focusTimeDurationChanged(_:)), name: Notification.Name("FocusDurationChanged"), object: nil)
         
@@ -113,11 +114,12 @@ class FocusController: TimerController {
     }
     
     @objc func focusTimeDurationChanged(_ notification: Notification) {
-        if let duration = notification.userInfo?["focusDuration"] as? String {
-            if let durationInt = Int(duration) {
-                totalTimeInSecondsIs = durationInt * 60
-                minutesOnClock = durationInt
-            }
+        if let time = notification.userInfo?["focusDuration"] as? Int {
+            duration = time
+            totalTimeInSecondsIs = time * 60
+            minutesOnClock = time
+            resetTimer()
+            print("duration in focusTimeDurationChanged is", duration)
         }
     }
 }

@@ -35,13 +35,13 @@ class SettingsController: UIViewController {
         settingsView.fillSuperview()
         
         settingsView.longBreakSwitch.addTarget(self, action: #selector(self.switchValueChanged(_:)), for: .valueChanged)
-        settingsView.focusTimeTextField.addTarget(self, action: #selector(textFieldDidChange(_:)), for: .editingChanged)
-        settingsView.shortBreakTextField.addTarget(self, action: #selector(textFieldDidChange(_:)), for: .editingChanged)
-        settingsView.longBreakTextField.addTarget(self, action: #selector(textFieldDidChange(_:)), for: .editingChanged)
+        settingsView.focusTimeTextField.addTarget(self, action: #selector(textFieldDidChange(_:)), for: .editingDidEnd)
+        settingsView.shortBreakTextField.addTarget(self, action: #selector(textFieldDidChange(_:)), for: .editingDidEnd)
+        settingsView.longBreakTextField.addTarget(self, action: #selector(textFieldDidChange(_:)), for: .editingDidEnd)
     }
     
     @objc func switchValueChanged(_ sender: UISwitch) {
-          // функция для выполнения действий при изменении положения UISwitch. строка ниже сохраняет уведомления, которые мы потом будем использовать в FocusController
+//      функция для выполнения действий при изменении положения UISwitch. строка ниже сохраняет уведомления, которые мы потом будем использовать в FocusController
         NotificationCenter.default.post(name: Notification.Name("SwitchValueChanged"), object: nil, userInfo: ["isOn": sender.isOn])
 
         UserDefaults.standard.set(sender.isOn, forKey: K.isSwitchOnKey)
@@ -54,15 +54,24 @@ class SettingsController: UIViewController {
         switch textField {
         case settingsView.focusTimeTextField:
             if let updatedText = textField.text {
-                NotificationCenter.default.post(name: Notification.Name("FocusDurationChanged"), object: nil, userInfo: ["focusDuration": updatedText])
+                if let updatedTextInt = Int(updatedText) {
+                    UserDefaults.standard.set(updatedTextInt, forKey: K.focusDurationKey)
+                    NotificationCenter.default.post(name: Notification.Name("FocusDurationChanged"), object: nil, userInfo: ["focusDuration": updatedTextInt])
+                }
             }
         case settingsView.shortBreakTextField:
             if let updatedText = textField.text {
-                NotificationCenter.default.post(name: Notification.Name("ShortBreakDurationChanged"), object: nil, userInfo: ["shortBreakDuration": updatedText])
+                if let updatedTextInt = Int(updatedText) {
+                    UserDefaults.standard.set(updatedTextInt, forKey: K.shortBreakDurationKey)
+                    NotificationCenter.default.post(name: Notification.Name("ShortBreakDurationChanged"), object: nil, userInfo: ["shortBreakDuration": updatedTextInt])
+                }
             }
         case settingsView.longBreakTextField:
             if let updatedText = textField.text {
-                NotificationCenter.default.post(name: Notification.Name("LongBreakDurationChanged"), object: nil, userInfo: ["longBreakDuration": updatedText])
+                if let updatedTextInt = Int(updatedText) {
+                    UserDefaults.standard.set(updatedTextInt, forKey: K.longBreakDurationKey)
+                    NotificationCenter.default.post(name: Notification.Name("LongBreakDurationChanged"), object: nil, userInfo: ["longBreakDuration": updatedTextInt])
+                }
             }
             
         default: print ("well well well, something isn't right")

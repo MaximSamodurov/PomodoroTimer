@@ -11,11 +11,11 @@ class ShortBreakController: TimerController {
     
     let shortBreakView = ShortBreakView(frame: CGRect.zero)
     var shortBreakCompletion: (() -> Void)?
-
+    var duration = UserDefaults.standard.integer(forKey: K.shortBreakDurationKey)
     let aDecoder = NSCoder()
     
     init() {
-        super.init(totalTimeInSecondsIs: 5 * 60, minutesOnClock: 5, currentTimerName: "shortBreak")
+        super.init(totalTimeInSecondsIs: duration * 60, minutesOnClock: duration, currentTimerName: "shortBreak")
     }
     
     required init?(coder aDecoder: NSCoder) {
@@ -29,8 +29,8 @@ class ShortBreakController: TimerController {
         view.addSubview(shortBreakView)
         shortBreakView.fillSuperview()
         
-//        NotificationCenter.default.addObserver(self, selector: #selector(shortBreakDurationChanged(_:)), name: Notification.Name("shortBreakDuration"), object: nil)
-    
+        NotificationCenter.default.addObserver(self, selector: #selector(shortBreakDurationChanged(_:)), name: Notification.Name("ShortBreakDurationChanged"), object: nil)
+
         shortBreakView.pausePlayButton.addTarget(self, action: #selector(playPause), for: .touchUpInside)
         shortBreakView.nextSectionButton.addTarget(self, action: #selector(nextSection), for: .touchUpInside)
         shortBreakView.threeDotsButton.addTarget(self, action: #selector(resetTimer), for: .touchUpInside)
@@ -41,12 +41,12 @@ class ShortBreakController: TimerController {
     
     override func startTimer(){
         super.startTimer()
-        shortBreakView.pausePlayButton.setImage(UIImage(systemName: "pause.fill", withConfiguration: config), for: .normal)
+        shortBreakView.pausePlayButton.setImage(UIImage(systemName: K.pauseButtonName, withConfiguration: config), for: .normal)
     }
     
     override func stopTimer() {
         super.stopTimer()
-        shortBreakView.pausePlayButton.setImage(UIImage(systemName: "play.fill", withConfiguration: config), for: .normal)
+        shortBreakView.pausePlayButton.setImage(UIImage(systemName: K.playButtonName, withConfiguration: config), for: .normal)
     }
 
     @objc override func resetTimer() {
@@ -75,12 +75,9 @@ class ShortBreakController: TimerController {
         }
     }
     
-//    @objc func shortBreakDurationChanged(_ notification: Notification) {
-//        if let duration = notification.userInfo?["shortBreakDuration"] as? String {
-//            if let durationInt = Int(duration) {
-//                totalTimeInSecondsIs = durationInt * 60
-//                minutesOnClock = durationInt
-//            }
-//        }
-//    }
+    @objc func shortBreakDurationChanged(_ notification: Notification) {
+        if let time = notification.userInfo?["shortBreakDuration"] as? Int {
+                duration = time
+        }
+    }
 }

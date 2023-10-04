@@ -48,5 +48,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         print("applicationWillTerminate")
         
     }
+    
+    // для обновления экрана нужно будет использовать функцию sceneDidBecomeActive https://developer.apple.com/documentation/uikit/uiscenedelegate/3197915-scenedidbecomeactive
 }
 
