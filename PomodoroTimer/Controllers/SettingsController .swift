@@ -38,6 +38,7 @@ class SettingsController: UIViewController {
         settingsView.focusTimeTextField.addTarget(self, action: #selector(textFieldDidChange(_:)), for: .editingDidEnd)
         settingsView.shortBreakTextField.addTarget(self, action: #selector(textFieldDidChange(_:)), for: .editingDidEnd)
         settingsView.longBreakTextField.addTarget(self, action: #selector(textFieldDidChange(_:)), for: .editingDidEnd)
+        settingsView.pomodorosNumberTextField.addTarget(self, action: #selector(textFieldDidChange(_:)), for: .editingDidEnd)
     }
     
     @objc func switchValueChanged(_ sender: UISwitch) {
@@ -71,6 +72,13 @@ class SettingsController: UIViewController {
                 if let updatedTextInt = Int(updatedText) {
                     UserDefaults.standard.set(updatedTextInt, forKey: K.longBreakDurationKey)
                     NotificationCenter.default.post(name: Notification.Name("LongBreakDurationChanged"), object: nil, userInfo: ["longBreakDuration": updatedTextInt])
+                }
+            }
+            case settingsView.pomodorosNumberTextField:
+            if let updatedText = textField.text {
+                if let updatedTextInt = Int(updatedText) {
+                    UserDefaults.standard.set(updatedTextInt, forKey: K.pomodorosNumberKey)
+                    NotificationCenter.default.post(name: Notification.Name("PomodorosNumberChanged"), object: nil, userInfo: ["pomodorosNumber": updatedTextInt])
                 }
             }
             

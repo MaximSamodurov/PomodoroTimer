@@ -16,10 +16,11 @@ class SettingsView: UIView {
 //    Enable long break
 //    Long Break Time
     
-    var focusDuration = 25
-    var amountOfPomodoros = 4
-    var shortBreakDuration = 5
-    var longBreakDuration = 20
+    var focusDuration = UserDefaults.standard.integer(forKey: K.focusDurationKey)
+    var amountOfPomodoros = UserDefaults.standard.integer(forKey: K.pomodorosNumberKey)
+    var shortBreakDuration = UserDefaults.standard.integer(forKey: K.shortBreakDurationKey)
+    var longBreakDuration = UserDefaults.standard.integer(forKey: K.longBreakDurationKey)
+    var isSwitchOn = UserDefaults.standard.bool(forKey: K.isSwitchOnKey)
     
     var settingsLabel, focusTimeMinutesLabel, focusTimePomodorosLabel, shortBreakTimeMinutesLabel, enableLongBreakLabel, longBreakTimeMinutesLabel: UILabel!
     let longBreakSwitch = UISwitch()
@@ -91,6 +92,12 @@ class SettingsView: UIView {
         
         let enableLongBreakStack = createStackView() // + toggle
         enableLongBreakLabel = createLabel("Enable Long Break")
+        
+        if isSwitchOn {
+            longBreakSwitch.setOn(true, animated: true)
+        } else {
+            longBreakSwitch.setOn(false, animated: true)
+        }
         
         enableLongBreakStack.addArrangedSubview(enableLongBreakLabel)
         enableLongBreakStack.addArrangedSubview(longBreakSwitch)
