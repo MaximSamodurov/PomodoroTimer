@@ -29,6 +29,10 @@ class SettingsView: UIView {
     let longBreakTextField = UITextField()
     let pomodorosNumberTextField = UITextField()
     
+    var pickerView = UIPickerView()
+    let numbers = [5,10,15,20,25,30,35]
+    var currentEditingTextField: UITextField?
+    
     override init(frame: CGRect) {
         super.init(frame: frame)
         setupViews()
@@ -46,11 +50,14 @@ class SettingsView: UIView {
         
         
         
+        pickerView.delegate = self
+        pickerView.dataSource = self
+        focusTimeTextField.delegate = self
         let focusTimeMinutesStack = createStackView() // + value
         focusTimeMinutesLabel = createLabel("Focus duration")
 
         focusTimeTextField.placeholder = "\(focusDuration)"
-        focusTimeTextField.keyboardType = .numberPad
+//        focusTimeTextField.keyboardType = .numberPad
         focusTimeTextField.text = String(focusDuration)
         focusTimeTextField.font = .robotoFlex(size: 30)
         
@@ -78,7 +85,7 @@ class SettingsView: UIView {
         let shortBreakTimeMinutesStack = createStackView() // + value
         shortBreakTimeMinutesLabel = createLabel("Short Break Duration")
         shortBreakTextField.placeholder = "\(shortBreakDuration)"
-        shortBreakTextField.keyboardType = .numberPad
+        shortBreakTextField.delegate = self
         shortBreakTextField.text = String(shortBreakDuration)
         shortBreakTextField.font = .robotoFlex(size: 30)
         
@@ -109,7 +116,7 @@ class SettingsView: UIView {
         let longBreakTimeMinutesStack = createStackView() // + value
         longBreakTimeMinutesLabel = createLabel("Long Break Duration")
         longBreakTextField.placeholder = "\(longBreakDuration)"
-        longBreakTextField.keyboardType = .numberPad
+        longBreakTextField.delegate = self
         longBreakTextField.text = String(longBreakDuration)
         longBreakTextField.font = .robotoFlex(size: 30)
         
@@ -132,4 +139,40 @@ class SettingsView: UIView {
         viewStack.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 4).isActive = true
         viewStack.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -4).isActive = true
     }
+}
+
+extension SettingsView: UIPickerViewDelegate, UIPickerViewDataSource {
+    func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
+        return numbers.count
+    }
+    
+    func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
+        return String(numbers[row])
+    }
+    
+    func numberOfComponents(in pickerView: UIPickerView) -> Int {
+        return 1
+    }
+    
+    func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
+        let selectedValue = pickerView.delegate?.pickerView?(pickerView, titleForRow: row, forComponent: component)
+        if let textField = currentEditingTextField {
+            textField.text = selectedValue
+        }
+    }
+}
+
+extension SettingsView: UITextFieldDelegate {
+    
+    func textFieldDidBeginEditing(_ textField: UITextField) {
+        currentEditingTextField = textField
+        // Покажите UIPickerView или выполните другие действия, чтобы отобразить его
+        pickerView.isHidden = false
+        textField.inputView = pickerView
+    }
+    
+    func textFieldDidEndEditing(_ textField: UITextField) {
+        currentEditingTextField = nil
+    }
+
 }
