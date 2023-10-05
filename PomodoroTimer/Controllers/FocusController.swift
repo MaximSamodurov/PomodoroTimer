@@ -12,6 +12,7 @@ class FocusController: TimerController {
     let focusView = FocusView(frame: CGRect.zero)
     var isSwitchOn = UserDefaults.standard.bool(forKey: K.isSwitchOnKey)
     var duration = UserDefaults.standard.integer(forKey: K.focusDurationKey)
+    var pomodorosNumber = UserDefaults.standard.integer(forKey: K.pomodorosNumberKey)
     let aDecoder = NSCoder()
 
     init() {
@@ -29,10 +30,10 @@ class FocusController: TimerController {
         
         view.addSubview(focusView)
         focusView.fillSuperview()
-        print("duration in viewDidLoad is", duration)
+        
         NotificationCenter.default.addObserver(self, selector: #selector(handleSwitchValueChanged(_:)), name: Notification.Name("SwitchValueChanged"), object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(focusTimeDurationChanged(_:)), name: Notification.Name("FocusDurationChanged"), object: nil)
-        
+        NotificationCenter.default.addObserver(self, selector: #selector(pomodorosNumberChanged(_:)), name: Notification.Name("PomodorosNumberChanged"), object: nil)
         focusView.pausePlayButton.addTarget(self, action: #selector(playPause), for: .touchUpInside)
         focusView.nextSectionButton.addTarget(self, action: #selector(nextSection), for: .touchUpInside)
         focusView.threeDotsButton.addTarget(self, action: #selector(resetTimer), for: .touchUpInside)
@@ -74,7 +75,7 @@ class FocusController: TimerController {
         
         focusTimeCount += 1
 //        print("current focusTimeCount is", focusTimeCount)
-        if focusTimeCount >= 4 { //if our goal is 4 Focus Times
+        if focusTimeCount >= pomodorosNumber { //if our goal is 4 Focus Times
             if isSwitchOn {
                 let longBreakVC = LongBreakController()
                 self.present(longBreakVC, animated: true)
@@ -119,7 +120,12 @@ class FocusController: TimerController {
             totalTimeInSecondsIs = time * 60
             minutesOnClock = time
             resetTimer()
-            print("duration in focusTimeDurationChanged is", duration)
+        }
+    }
+    
+    @objc func pomodorosNumberChanged(_ notification: Notification) {
+        if let number = notification.userInfo?["pomodorosNumber"] as? Int {
+            pomodorosNumber = number
         }
     }
 }
