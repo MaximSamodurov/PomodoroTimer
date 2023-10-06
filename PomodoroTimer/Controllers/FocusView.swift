@@ -90,6 +90,19 @@ class FocusView: UIView {
         return button
     }()
     
+    // UILabel for current Pomodoro Number
+    let pomodorosNumberLabel = {
+        let label = UILabel()
+        label.text = "Current Pomodoro: 1️⃣ out of 4️⃣"
+        label.clipsToBounds = true
+        label.attributedText = NSAttributedString(string: label.text!, attributes: [.kern: 1.1])
+        label.numberOfLines = 1
+        label.font = .robotoBlack(size: 22)
+        label.textColor = UIColor(#colorLiteral(red: 0.3531352282, green: 0.1171852872, blue: 0.1062337533, alpha: 1))
+        return label
+    }()
+
+    
     override init(frame: CGRect) {
         super.init(frame: frame)
         
@@ -109,10 +122,12 @@ class FocusView: UIView {
         addSubview(counterStack)
         addSubview(lowStackView)
         addSubview(chipImage)
+        addSubview(pomodorosNumberLabel)
         
         counterStack.translatesAutoresizingMaskIntoConstraints = false
         lowStackView.translatesAutoresizingMaskIntoConstraints = false
         chipImage.translatesAutoresizingMaskIntoConstraints = false 
+        pomodorosNumberLabel.translatesAutoresizingMaskIntoConstraints = false
         
         NSLayoutConstraint.activate([
             chipImage.topAnchor.constraint(equalTo: topAnchor, constant: 130),
@@ -131,7 +146,10 @@ class FocusView: UIView {
             pausePlayButton.bottomAnchor.constraint(equalTo: lowStackView.bottomAnchor),
             
             nextSectionButton.heightAnchor.constraint(equalToConstant: 80),
-            threeDotsButton.heightAnchor.constraint(equalToConstant: 80)
+            threeDotsButton.heightAnchor.constraint(equalToConstant: 80),
+            
+            pomodorosNumberLabel.centerXAnchor.constraint(equalTo: pausePlayButton.centerXAnchor),
+            pomodorosNumberLabel.topAnchor.constraint(equalTo: pausePlayButton.bottomAnchor, constant: 40),
         ])
         
         backgroundColor = UIColor(#colorLiteral(red: 1, green: 0.9467936158, blue: 0.9479826093, alpha: 1))
