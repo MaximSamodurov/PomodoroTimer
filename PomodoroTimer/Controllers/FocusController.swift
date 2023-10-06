@@ -13,6 +13,7 @@ class FocusController: TimerController {
     var isSwitchOn = UserDefaults.standard.bool(forKey: K.isSwitchOnKey)
     var duration = UserDefaults.standard.integer(forKey: K.focusDurationKey)
     var pomodorosNumber = UserDefaults.standard.integer(forKey: K.pomodorosNumberKey)
+    var focusTimeCount = UserDefaults.standard.integer(forKey: K.focusTimeCountKey)
     let aDecoder = NSCoder()
 
     init() {
@@ -23,13 +24,16 @@ class FocusController: TimerController {
         super.init(coder: aDecoder)
     }
     
-    var focusTimeCount = 1
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        updateFocusTimeNumber(1)
         
         view.addSubview(focusView)
         focusView.fillSuperview()
+        
+        title = "Timer"
+        self.navigationController?.isNavigationBarHidden = true
         
         NotificationCenter.default.addObserver(self, selector: #selector(handleSwitchValueChanged(_:)), name: Notification.Name("SwitchValueChanged"), object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(focusTimeDurationChanged(_:)), name: Notification.Name("FocusDurationChanged"), object: nil)
@@ -40,6 +44,8 @@ class FocusController: TimerController {
         
         focusView.timeMinutesCounter.text = String(format: "%02d", minutesOnClock)
         focusView.timeSecondsCounter.text = String(format: "%02d", secondsOnClock)
+        
+        focusView.pomodorosNumberLabel.text = "Current Pomodoro: \(focusTimeCount) out of \(pomodorosNumber)"
     }
     
     override func startTimer(){
@@ -73,17 +79,17 @@ class FocusController: TimerController {
     @objc override func nextSection() {
         super.nextSection()
         
-        focusTimeCount += 1
-//        print("current focusTimeCount is", focusTimeCount)
-        if focusTimeCount >= pomodorosNumber { //if our goal is 4 Focus Times
+        updateFocusTimeNumber(focusTimeCount+1)
+
+        if focusTimeCount > pomodorosNumber { 
             if isSwitchOn {
                 let longBreakVC = LongBreakController()
                 self.present(longBreakVC, animated: true)
                 longBreakVC.resetTimer()
                 longBreakVC.playPause()
-                focusTimeCount = 0
+                updateFocusTimeNumber(1)
             } else {
-                focusTimeCount = 0
+                updateFocusTimeNumber(1)
             }
         } else {
              let shortBreakVC = ShortBreakController()
@@ -127,5 +133,11 @@ class FocusController: TimerController {
         if let number = notification.userInfo?["pomodorosNumber"] as? Int {
             pomodorosNumber = number
         }
+    }
+    
+    func updateFocusTimeNumber(_ val: Int) {
+        focusTimeCount = val
+        focusView.pomodorosNumberLabel.text = "Current Pomodoro: \(focusTimeCount) out of \(pomodorosNumber)"
+        UserDefaults.standard.set(focusTimeCount, forKey: K.focusTimeCountKey)
     }
 }

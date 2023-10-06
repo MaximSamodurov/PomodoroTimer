@@ -24,6 +24,7 @@ struct K { //constants
     static let shortBreakDurationKey = "shortBreakDuration"
     static let longBreakDurationKey = "longBreakDuration"
     static let pomodorosNumberKey = "pomodorosNumber"
+    static let focusTimeCountKey = "focusTimeCount"
     
     static let playButtonName = "play.fill"
     static let pauseButtonName = "pause.fill"
