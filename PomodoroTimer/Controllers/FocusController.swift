@@ -81,23 +81,21 @@ class FocusController: TimerController {
         
         updateFocusTimeNumber(focusTimeCount+1)
 
-        if focusTimeCount > pomodorosNumber { 
+        if focusTimeCount > pomodorosNumber {
             if isSwitchOn {
                 let longBreakVC = LongBreakController()
                 self.present(longBreakVC, animated: true)
                 longBreakVC.resetTimer()
                 longBreakVC.playPause()
-                updateFocusTimeNumber(1)
-            } else {
-                updateFocusTimeNumber(1)
             }
+            updateFocusTimeNumber(1)
         } else {
              let shortBreakVC = ShortBreakController()
                 shortBreakVC.shortBreakCompletion = {
-                    //                 код, который должен быть запущен после завершения ShortBreak
+ //                 код, который должен быть запущен после завершения ShortBreak
                     self.playPause()
                 }
-                // Показываем ShortBreakTimeViewController
+//              Показываем ShortBreakTimeViewController
                 self.present(shortBreakVC, animated: true, completion: nil)
                 shortBreakVC.resetTimer()
                 shortBreakVC.playPause()
@@ -109,14 +107,6 @@ class FocusController: TimerController {
         if let isOn = notification.userInfo?["isOn"] as? Bool {
             // нужно обновить значение isSwitchOn, а то иначе он будет использовать только, которое существовало при инициализации FocusController
             isSwitchOn = isOn
-
-            if isOn {
-//                print("is switch on? \(isSwitchOn)")
-                //  действия при включенном UISwitch
-            } else {
-//                print("is switch on? \(isSwitchOn)")
-                //  действия при выключенном UISwitch
-            }
         }
     }
     

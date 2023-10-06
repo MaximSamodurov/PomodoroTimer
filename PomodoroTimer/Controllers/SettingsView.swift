@@ -8,13 +8,6 @@
 import UIKit
 
 class SettingsView: UIView {
-   
-//    Rows:
-//    Focus Time
-//    Focus Streaks
-//    Short Break Time
-//    Enable long break
-//    Long Break Time
     
     var focusDuration = UserDefaults.standard.integer(forKey: K.focusDurationKey)
     var amountOfPomodoros = UserDefaults.standard.integer(forKey: K.pomodorosNumberKey)
@@ -57,7 +50,6 @@ class SettingsView: UIView {
         focusTimeMinutesLabel = createLabel("Focus duration")
 
         focusTimeTextField.placeholder = "\(focusDuration)"
-//        focusTimeTextField.keyboardType = .numberPad
         focusTimeTextField.text = String(focusDuration)
         focusTimeTextField.font = .robotoFlex(size: 30)
         
@@ -70,7 +62,7 @@ class SettingsView: UIView {
         let focusTimePomodorosStack = createStackView() // + stepper
         focusTimePomodorosLabel = createLabel("Pomodoros")
         pomodorosNumberTextField.placeholder = "\(amountOfPomodoros)"
-        pomodorosNumberTextField.keyboardType = .numberPad
+        pomodorosNumberTextField.keyboardType = .numberPad          // оставил тут .numberPad чисто по приколу и ради разнообразия
         pomodorosNumberTextField.text = String(amountOfPomodoros)
         pomodorosNumberTextField.font = .robotoFlex(size: 30)
         
@@ -166,7 +158,7 @@ extension SettingsView: UITextFieldDelegate {
     
     func textFieldDidBeginEditing(_ textField: UITextField) {
         currentEditingTextField = textField
-        // Покажите UIPickerView или выполните другие действия, чтобы отобразить его
+//      показываем UIPickerView или делаем другие действия, чтобы отобразить его
         pickerView.isHidden = false
         textField.inputView = pickerView
     }

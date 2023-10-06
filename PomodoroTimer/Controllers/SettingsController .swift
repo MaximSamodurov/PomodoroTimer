@@ -44,9 +44,7 @@ class SettingsController: UIViewController {
     @objc func switchValueChanged(_ sender: UISwitch) {
 //      функция для выполнения действий при изменении положения UISwitch. строка ниже сохраняет уведомления, которые мы потом будем использовать в FocusController
         NotificationCenter.default.post(name: Notification.Name("SwitchValueChanged"), object: nil, userInfo: ["isOn": sender.isOn])
-
         UserDefaults.standard.set(sender.isOn, forKey: K.isSwitchOnKey)
-//        print("userDefaults SwitchIsOn",UserDefaults.standard.bool(forKey: K.isSwitchOnKey))
       }
     
     @objc func textFieldDidChange(_ textField: UITextField) {
@@ -74,7 +72,7 @@ class SettingsController: UIViewController {
                     NotificationCenter.default.post(name: Notification.Name("LongBreakDurationChanged"), object: nil, userInfo: ["longBreakDuration": updatedTextInt])
                 }
             }
-            case settingsView.pomodorosNumberTextField:
+        case settingsView.pomodorosNumberTextField:
             if let updatedText = textField.text {
                 if let updatedTextInt = Int(updatedText) {
                     UserDefaults.standard.set(updatedTextInt, forKey: K.pomodorosNumberKey)

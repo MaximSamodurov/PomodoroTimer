@@ -93,7 +93,7 @@ class FocusView: UIView {
     // UILabel for current Pomodoro Number
     let pomodorosNumberLabel = {
         let label = UILabel()
-        label.text = "Current Pomodoro: 1️⃣ out of 4️⃣"
+        label.text = "Current Pomodoro: 1 out of 4"
         label.clipsToBounds = true
         label.attributedText = NSAttributedString(string: label.text!, attributes: [.kern: 1.1])
         label.numberOfLines = 1

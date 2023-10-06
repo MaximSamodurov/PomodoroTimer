@@ -68,9 +68,9 @@ class ShortBreakController: TimerController {
     @objc override func nextSection() {
         super.nextSection()
         stopTimer()
-        // В момент завершения Short Break
+//      В момент завершения Short Break
         self.dismiss(animated: true) { [weak self] in
-            // Вызываем замыкание при завершении анимации
+//      Вызываем замыкание при завершении анимации
             self?.shortBreakCompletion?()
         }
     }
