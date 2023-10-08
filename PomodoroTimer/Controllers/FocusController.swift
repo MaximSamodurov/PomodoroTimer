@@ -88,7 +88,9 @@ class FocusController: TimerController {
                 longBreakVC.resetTimer()
                 longBreakVC.playPause()
             }
+            // on completion, we should:
             updateFocusTimeNumber(1)
+            createConfettiLayer()
         } else {
              let shortBreakVC = ShortBreakController()
                 shortBreakVC.shortBreakCompletion = {
