@@ -122,6 +122,7 @@ class FocusController: TimerController {
     @objc func pomodorosNumberChanged(_ notification: Notification) {
         if let number = notification.userInfo?["pomodorosNumber"] as? Int {
             pomodorosNumber = number
+            focusView.pomodorosNumberLabel.text = "Current Pomodoro: \(focusTimeCount) out of \(pomodorosNumber)"
         }
     }
     
