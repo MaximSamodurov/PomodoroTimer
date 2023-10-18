@@ -194,4 +194,61 @@ class TimerController: UIViewController {
 //            return
 //        }
 //    }
+    
+    func createConfettiLayer() {
+        let layer = CAEmitterLayer()
+        layer.emitterPosition = CGPoint(
+            x: view.center.x,
+            y: view.center.y
+        )
+        
+        let colors: [UIColor] = [
+            .systemGreen, .systemPink, .systemBlue, .systemOrange, .systemYellow, .systemRed, .systemIndigo
+        ]
+        
+        let shapes: [String] = [
+            "heart.fill", "triangle.fill", "rhombus.fill"
+        ]
+        
+        let cells: [CAEmitterCell] = colors.compactMap { color in
+            let cell = CAEmitterCell()
+            cell.scale = 0.5
+            cell.emissionRange = .pi * 2
+            cell.lifetime = 5
+            cell.birthRate = 10
+            cell.velocity = 500
+//            cell.birthRate
+            if let shape = shapes.randomElement() {
+                if let coloredImage = createColoredImage(imageName: shape, color: color) {
+                    cell.contents = coloredImage.cgImage
+                }
+            }
+            cell.color = color.cgColor
+            return cell
+        }
+        
+        layer.emitterCells = cells
+        view.layer.addSublayer(layer)
+        
+        // timer for animation, duration is = withTimeInterval
+            Timer.scheduledTimer(withTimeInterval: 2, repeats: false) { _ in
+                layer.birthRate = 0 // stop generating new elements of confetti
+                DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
+                    layer.removeFromSuperlayer() // aaand delete the layer in 2 seconds (value in line above: (deadline: .now() + 2))
+                }
+            }
+    }
+
+    private func createColoredImage(imageName: String, color: UIColor) -> UIImage? {
+        if let image = UIImage(systemName: imageName)?.withRenderingMode(.alwaysTemplate) {
+            UIGraphicsBeginImageContextWithOptions(image.size, false, image.scale)
+            color.set()
+            image.draw(in: CGRect(origin: .zero, size: image.size))
+            let coloredImage = UIGraphicsGetImageFromCurrentImageContext()
+            UIGraphicsEndImageContext()
+            return coloredImage
+        }
+        return nil
+    }
+
 }

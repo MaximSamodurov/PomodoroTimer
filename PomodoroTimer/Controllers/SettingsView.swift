@@ -41,53 +41,32 @@ class SettingsView: UIView {
         let viewStack = createStackView() // a stack View for all the settings
         viewStack.axis = .vertical
         
-        
-        
         pickerView.delegate = self
         pickerView.dataSource = self
-        focusTimeTextField.delegate = self
+        
         let focusTimeMinutesStack = createStackView() // + value
         focusTimeMinutesLabel = createLabel("Focus duration")
-
-        focusTimeTextField.placeholder = "\(focusDuration)"
-        focusTimeTextField.text = String(focusDuration)
-        focusTimeTextField.font = .robotoFlex(size: 30)
-        
+        setTextField(focusDuration, focusTimeTextField)
+        focusTimeTextField.delegate = self // we need this for UIPickerView
         focusTimeMinutesStack.addArrangedSubview(focusTimeMinutesLabel)
         focusTimeMinutesStack.addArrangedSubview(focusTimeTextField)
         addSubview(focusTimeMinutesStack)
-        focusTimeTextField.addDoneButtonOnKeyboard()
-        
         
         let focusTimePomodorosStack = createStackView() // + stepper
         focusTimePomodorosLabel = createLabel("Pomodoros")
-        pomodorosNumberTextField.placeholder = "\(amountOfPomodoros)"
+        setTextField(amountOfPomodoros, pomodorosNumberTextField)
         pomodorosNumberTextField.keyboardType = .numberPad          // оставил тут .numberPad чисто по приколу и ради разнообразия
-        pomodorosNumberTextField.text = String(amountOfPomodoros)
-        pomodorosNumberTextField.font = .robotoFlex(size: 30)
-        
         focusTimePomodorosStack.addArrangedSubview(focusTimePomodorosLabel)
         focusTimePomodorosStack.addArrangedSubview(pomodorosNumberTextField)
         addSubview(focusTimePomodorosStack)
         
-        focusTimePomodorosStack.distribution = .equalSpacing
-        pomodorosNumberTextField.addDoneButtonOnKeyboard()
-        
-        
         let shortBreakTimeMinutesStack = createStackView() // + value
         shortBreakTimeMinutesLabel = createLabel("Short Break Duration")
-        shortBreakTextField.placeholder = "\(shortBreakDuration)"
+        setTextField(shortBreakDuration, shortBreakTextField)
         shortBreakTextField.delegate = self
-        shortBreakTextField.text = String(shortBreakDuration)
-        shortBreakTextField.font = .robotoFlex(size: 30)
-        
         shortBreakTimeMinutesStack.addArrangedSubview(shortBreakTimeMinutesLabel)
         shortBreakTimeMinutesStack.addArrangedSubview(shortBreakTextField)
         addSubview(shortBreakTimeMinutesStack)
-        shortBreakTextField.addDoneButtonOnKeyboard()
-        shortBreakTimeMinutesStack.distribution = .equalSpacing
-        
-        
         
         let enableLongBreakStack = createStackView() // + toggle
         enableLongBreakLabel = createLabel("Enable Long Break")
@@ -100,24 +79,15 @@ class SettingsView: UIView {
         
         enableLongBreakStack.addArrangedSubview(enableLongBreakLabel)
         enableLongBreakStack.addArrangedSubview(longBreakSwitch)
-        enableLongBreakStack.distribution = .equalSpacing
         addSubview(enableLongBreakStack)
-        
-        
         
         let longBreakTimeMinutesStack = createStackView() // + value
         longBreakTimeMinutesLabel = createLabel("Long Break Duration")
-        longBreakTextField.placeholder = "\(longBreakDuration)"
+        setTextField(longBreakDuration, longBreakTextField)
         longBreakTextField.delegate = self
-        longBreakTextField.text = String(longBreakDuration)
-        longBreakTextField.font = .robotoFlex(size: 30)
-        
         longBreakTimeMinutesStack.addArrangedSubview(longBreakTimeMinutesLabel)
         longBreakTimeMinutesStack.addArrangedSubview(longBreakTextField)
         addSubview(longBreakTimeMinutesStack)
-        longBreakTimeMinutesStack.distribution = .equalSpacing
-        longBreakTextField.addDoneButtonOnKeyboard()
-        
         
         // main viewStack is below:
         viewStack.addArrangedSubview(focusTimeMinutesStack)
